@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "129742961258",
+    "firebase_url": "https://daser-63368.firebaseio.com",
+    "project_id": "daser-63368",
+    "storage_bucket": "daser-63368.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129742961258:android:c2f3822176514782",
+        "android_client_info": {
+          "package_name": "Daser.team.com.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129742961258-g4ogkl7paiug31q85b0votf1rbqfan76.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjVrDJuikLrZwa7wIsPkixJegXNVEmfxQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:orientation="horizontal"
+    android:padding="10dp">
+    <!--
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="60dp"
+        android:scaleType="fitXY"
+        android:layout_height="40dp"
+        android:id="@+id/ivFish"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="fish name"
+        android:id="@+id/textFishName"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/ivFish"
+        android:layout_toLeftOf="@+id/textPrice"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="price"
+        android:id="@+id/textPrice"
+        android:textColor="@color/colorAccent"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/textSize"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/textFishName"
+        android:layout_toRightOf="@id/ivFish"
+        android:layout_toEndOf="@id/ivFish"
+        android:textColor="#666"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="sd"
+        android:id="@+id/textType"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/textSize"
+        android:layout_toRightOf="@id/ivFish"
+        android:textColor="#666"/>
+</LinearLayout>
+    -->
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:background="#f2f2f2"
+        android:elevation="4dp"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/ivFish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic__black_24dp"
+            />
+
+
+        <TextView
+            android:id="@+id/uname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/ivFish"
+            android:paddingBottom="5dp"
+            android:text="Manohar Manu"
+            android:textColor="#000000"
+            android:textSize="24dp" />
+
+
+        <TextView
+            android:id="@+id/datetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_below="@+id/uname"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:paddingBottom="5dp"
+            android:text="10-10-2017,10:18 pm"
+            android:textColor="#000000"
+            android:textSize="10dp" />
+
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/uname"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/ivFish"
+            android:text="Description of the appointment scheduled"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Provider  : "
+
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+
+            android:layout_marginTop="108dp"
+            android:drawablePadding="10dp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:gravity="left"
+
+            />
+        <EditText
+            android:id="@+id/company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="100dp"
+            android:drawablePadding="10dp"
+            android:editable="false"
+            android:gravity="center_vertical"
+            android:hint="ABC Pvt Lmt..."
+            android:padding="5dp"
+            android:textColorHint="#000000"
+            android:textSize="15dp" />
+
+
+        <ImageView
+            android:id="@+id/cardview1_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/speedometer"
+            android:layout_alignTop="@+id/open"
+            android:layout_toLeftOf="@+id/open"
+            android:layout_toStartOf="@+id/open"
+            android:layout_marginRight="5dp"
+            />
+
+
+        <TextView
+            android:id="@+id/open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="Open"
+            android:textColor="#00cc00"
+            android:textSize="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/company"
+            android:layout_alignEnd="@+id/company" />
+
+
+        <ImageView
+            android:id="@+id/cardview2_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_vert_black_24dp"
+            android:layout_alignTop="@+id/open"
+            android:layout_toRightOf="@+id/open"
+            android:layout_toEndOf="@+id/open" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ivFish"
+            android:text="$ 100.00"
+            android:textColor="#4144f1"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>
