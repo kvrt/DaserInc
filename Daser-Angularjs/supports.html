@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Daser Admin - Dashboard</title>
+ 
+<div ng-include="'layout/main_header.html'"></div>
+    <div class="content-wrapper" style="padding-bottom:100px;">
+
+      <div class="container-fluid" ng-controller="supports">
+
+		<div ng-include="'layout/supports_header.html'"></div>
+
+        <!-- Example Tables Card -->
+        <div class="card mb-3"> 
+          <div class="card-header" style="font-weight:bold;">
+            <i class="fa fa-table"></i>
+           Supports<!--<a href="javascript:location.reload();"><span class="glyphicon glyphicon-edit"></span>Reload</a>-->
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
+                <thead>
+                  <tr style="background-color:#007bff;color:white;">
+                    <th>S.No</th>
+					<th>Signer Type</th>
+						
+                    <th>Name</th>
+					<th>Phone / Email</th>
+                  
+                    <th>Subject</th>
+                    <th>Description</th>
+                   
+                      
+                      
+                  </tr>
+                </thead>
+                
+                <tbody>
+                    
+              
+                        <tr ng-repeat="sup in support">
+                 
+        
+       
+                  
+                    <td align="center">{{$index+1}}</td>
+					<td align="center">{{sup.signer_type}}</td>
+					
+                      <td style="font-size:13px;"><span ng-repeat="user in users | filter:{id:sup.user_id }">{{user.first_name}} {{user.last_name}}</span></td>
+					  
+                      <td style="font-size:13px;"><span ng-repeat="user in users | filter:{id:sup.user_id }">{{user.phonenumber}} / {{user.emailaddress}}</span></td>
+                   
+                    <td style="font-size:13px;">{{sup.subject}}</td>
+                    <td> {{sup.description}} </td>
+                   
+                  </tr>
+                   
+				  
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer small text-muted">
+            
+          </div>
+        </div>
+
+      </div>
+      <!-- /.container-fluid -->
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  <div ng-include="'layout/main_footer.html'"></div>
+</html>

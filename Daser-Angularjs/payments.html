@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Daser Admin - Dashboard</title>
+ 
+<div ng-include="'layout/main_header.html'"></div>
+    <div class="content-wrapper" style="padding-bottom:100px;">
+
+      <div class="container-fluid" ng-controller="payments">
+
+		<div ng-include="'layout/payment_header.html'"></div>
+
+        <!-- Example Tables Card -->
+        <div class="card mb-3"> 
+          <div class="card-header" style="font-weight:bold;">
+            <i class="fa fa-table"></i>
+            Payments<!--<a href="javascript:location.reload();"><span class="glyphicon glyphicon-edit"></span>Reload</a>-->
+          </div>
+	<!--	  
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+<input type="text" ng-model="a">
+		  <input type="text" ng-model="b">
+		  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>-->
+  
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
+                <thead>
+                  <tr style="background-color:#007bff;color:white;">
+                    <th>S.No</th>
+						
+                    <th>Service</th>
+					<th>Buyer</th>
+                    <th>Seller</th>
+					<th>Work Status</th>
+					
+                    <th>Cost</th>
+                    <th>Paid To Seller</th>
+					
+                    <th>Action</th>
+                      
+                      
+                      
+                  </tr>
+                </thead>
+                
+                <tbody>
+                    
+              
+                        <tr style="background-color:;" ng-repeat="request in requests"ng-init="setTotals(request)">
+                 
+        
+       
+                  
+                    <td align="center">{{$index+1}}</td>
+
+                      <td style="font-size:13px;">
+					  <span ng-repeat="service in stype | filter: {id:request.service_type_id}">
+					  {{service.description}} - {{request.created_on}}
+					  </span>
+					  </td>
+                    <td><span ng-repeat="user in users | filter: {id:request.user_id}">{{user.first_name}} {{user.last_name}}</span></td>
+                    <td>
+					
+					<span ng-if="request.status!='P'">
+                          <span ng-repeat="user in users | filter: {id:request.seller_user_id}">
+						  
+						  <span ng-repeat="org in organ | filter: {id:user.org_id}">
+						  {{org.name}} - <span ng-if="user.active=='Y'" style="color:forestgreen;font-weight:bold;"> Active </span><span ng-if="user.active=='N'" style="font-weight:bold;color:tomato;"> InActive </span>
+						  </span>
+						  
+						  </span>
+						  </span>
+					
+					</td>
+					<td>
+							<div ng-if="request.status == 'P'">
+            <span style="font-size:12px;color:red;font-weight:bold;">Not yet Accepted</span>
+    
+    </div>						<div ng-if="request.status == 'C' ">
+        <span style="color:forestgreen;font-weight:bold;font-size:12px;">Completed</span>
+    </div>
+	
+					<div ng-if="request.status == 'I' ">
+        <span style="color:orange;font-weight:bold;font-size:12px;">InProcess</span>
+    </div>
+					
+					</td>
+                    <td style="text-align:right;">${{request.service_amount}}</td>
+                    <td style="text-align:center;"> 
+
+					<span ng-repeat="selleramt in spayment | filter: {seller_id:request.id}">
+					<span ng-if="selleramt.id!=''">
+					     <span style="color:forestgreen;"><a href="javascript:void(0)" class="badge badge-success"><i class="fa fa-usd" aria-hidden="true"></i> Paid  </a></span>
+                     </span>
+					 <span ng-if="selleramt.id==''">
+					     <span style="color:forestgreen;"><a href="javascript:void(0)" class="badge badge-danger"><i class="fa fa-usd" aria-hidden="true"></i> Not Yet Paid  </a></span>
+                     </span>
+					 
+					</span>
+
+					</td>
+					 <td align="center">
+                       
+                          <span ng-if="request.status=='C'" style="color:forestgreen;"><a href="javascript:void(0)" ng-click="update(request.user_id)" data-toggle="modal" data-target="#myModal" class="badge badge-danger"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>   </a></span>
+                      </td>
+                  </tr>
+                  
+				  
+				  <tr>
+                 
+        
+       
+                  
+                    <th colspan="4">Total</th>
+                    <th style="text-align:right;">${{GTotal | number:2}}</th>
+                    <th style="text-align:right;">   </th>
+					                    <th style="text-align:right;"> </th>
+					 
+                  </tr>
+                    
+				  
+				  
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer small text-muted">
+            
+          </div>
+        </div>
+
+      </div>
+      <!-- /.container-fluid -->
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  <div ng-include="'layout/main_footer.html'"></div>
+</html>

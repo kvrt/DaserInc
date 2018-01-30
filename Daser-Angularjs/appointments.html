@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Daser Admin - Dashboard</title>
+ 
+<div ng-include="'layout/main_header.html'"></div>
+    <div class="content-wrapper" style="padding-bottom:100px;">
+
+      <div class="container-fluid" ng-controller="appointments">
+
+		<div ng-include="'layout/appointments_header.html'"></div>
+
+        <!-- Example Tables Card -->
+        <div class="card mb-3"> 
+          <div class="card-header" style="font-weight:bold;">
+            <i class="fa fa-table"></i>
+            All Appointments<!--<a href="javascript:location.reload();"><span class="glyphicon glyphicon-edit"></span>Reload</a>-->
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
+                <thead>
+                  <tr style="background-color:#007bff;color:white;">
+                    <th>S.No</th>
+                    <th>Service</th>
+					<th>Cost</th>
+                    <th>Buyer</th>
+                    <th>Email / Phone</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                      <th>Seller</th>
+                      
+                      
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                     <th>S.No</th>
+                    <th>Service</th>
+					<th>Cost</th>
+                    <th>Buyer</th>
+                    <th>Email / Phone</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                      <th>Seller</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                          <tr style="background-color:;"  ng-repeat="res in userrequest ">
+                 
+        
+       
+                  
+                    <td align="center">{{ $index+1 }}
+					
+						</td>
+                      <td style="font-size:12px;"><span ng-repeat="service in servicetype | filter: {id:res.service_type_id}">
+					  {{service.description}} - {{res.created_on}}
+					  </span></td>
+                    <td>${{res.service_amount}}</td>
+                    <td><span ng-repeat="user in allappointments | filter: {id:res.user_id}">{{user.first_name}},{{user.last_name}}</span></td>
+                    <td><span ng-repeat="user in allappointments | filter: {id:res.user_id}">{{user.emailaddress}} / {{user.phonenumber}}</span></td>
+                    <td style="font-size:13px;">
+					
+					<span ng-repeat="user in allappointments | filter: {id:res.user_id}">
+					<span ng-repeat="adr in useraddr | filter: {id:user.address_id}">{{adr.address_line1}}, {{adr.address_line2}}, {{adr.city}}, {{adr.state}}, {{adr.country}} - {{adr.country}}</span>
+					</span>
+					</td>
+                            <td style="text-align:center;">
+
+
+									<div ng-if="res.status == 'P'">
+    <span style="font-size:12px;color:red;font-weight:bold;">Not yet Accepted</span>
+    
+    </div>						<div ng-if="res.status == 'C' ">
+        <span style="color:forestgreen;font-weight:bold;font-size:12px;">Completed</span>
+    </div>
+	
+					<div ng-if="res.status == 'I' ">
+        <span style="color:orange;font-weight:bold;font-size:12px;">InProcess</span>
+    </div>
+			<!--		<div ng-if="res.status == '' ">
+        <span style="font-size:12px;color:red;font-weight:bold;">Not yet Accepted</span>
+    </div>-->
+	
+	</td>
+                      
+					  
+					  <td align="center">
+                       
+                          <span ng-repeat="user in allappointments | filter: {id:res.seller_user_id}">
+						  
+						  <span ng-repeat="org in orgname | filter: {id:user.org_id}">
+						  {{org.name}} - <span ng-if="user.active=='Y'" style="color:forestgreen;font-weight:bold;"> Active </span><span ng-if="user.active=='N'" style="font-weight:bold;color:tomato;"> InActive </span>
+						  </span>
+						  
+						  </span>
+                      </td>
+                  </tr>
+                  
+              
+                    
+              
+                    
+              
+                 
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer small text-muted">
+            
+          </div>
+        </div>
+
+      </div>
+      <!-- /.container-fluid -->
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  <div ng-include="'layout/main_footer.html'"></div>
+</html>

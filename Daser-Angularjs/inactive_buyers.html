@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Daser Admin - Dashboard</title>
+ 
+<div ng-include="'layout/main_header.html'"></div>
+    <div class="content-wrapper" style="padding-bottom:100px;">
+
+      <div class="container-fluid" ng-controller="dashboard">
+ 
+		<div ng-include="'layout/users_header.html'"></div>
+
+        <!-- Example Tables Card -->
+        <div class="card mb-3"> 
+          <div class="card-header" style="font-weight:bold;">
+            <i class="fa fa-table"></i>
+            InActive Buyers
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
+                <thead>
+                  <tr style="background-color:#007bff;color:white;font-size:13px;">
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>E - Mail</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Date</th>
+                      <th>Status</th>
+                      
+                      
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr style="font-size:13px;">
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>E - Mail</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Date</th>
+                      <th>Status</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                    
+                        <tr style="background-color:;"  ng-repeat="res in seller | filter: {active: 'N',signer_type:'Buyer'} ">
+                 
+        
+       
+                  
+                    <td align="center">{{ $index+1 }}
+					zsdasd
+						</td>
+                      <td style="font-size:13px;">{{res.first_name}} {{res.last_name}}</td>
+                    <td>{{res.emailaddress}}</td>
+                    <td>{{res.phonenumber}}</td>
+                    <td style="font-size:13px;"><span ng-repeat="adr in addr | filter: {id:res.address_id}">{{adr.address_line1}}, {{adr.address_line2}}, {{adr.city}}, {{adr.state}}, {{adr.country}} - {{adr.country}}</span></td>
+                            <td style="text-align:center;font-size:12px;">
+	{{res.created_on}}
+							</td>
+                      
+					  
+					  <td align="center">
+                       
+                          
+						  
+						  <div ng-if="res.active == 'Y' ">
+						  <span style="color:forestgreen;">Active</span>
+						  </div>
+						  <div ng-if="res.active == 'N' ">
+						  <span style="color:tomato;">InActive</span>
+						  </div>
+						  
+						  
+						  </span>
+						  
+                      </td>
+                  </tr>
+              
+              
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer small text-muted">
+            
+          </div>
+        </div>
+
+      </div>
+      <!-- /.container-fluid -->
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  <div ng-include="'layout/main_footer.html'"></div>
+</html>
