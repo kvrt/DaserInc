@@ -48,7 +48,7 @@
                     
               
               
-                        <tr style="background-color:;"  ng-repeat="res in seller | filter: {active: 'N',signer_type:'Seller'} " ng-init="setTotals_user_inactive_seller(res)">
+                        <tr style="background-color:;"  ng-repeat="res in seller | filter: {active: 'N',signer_type:'Seller'} | orderBy : '-created_on' " ng-init="setTotals_user_inactive_seller(res)">
                  
         
        
@@ -60,7 +60,7 @@
                     <td><span ng-repeat="orgs in organ | filter: {id:res.org_id}">{{orgs.name}}</span></td>
                     <td>{{res.emailaddress}}</td>
                     <td>{{res.phonenumber}}</td>
-                    <td style="font-size:13px;"><span ng-repeat="adr in addr | filter: {id:res.address_id}">{{adr.address_line1}}, {{adr.address_line2}}, {{adr.city}}, {{adr.state}}, {{adr.country}} - {{adr.country}}</span></td>
+                    <td style="font-size:13px;"><span ng-repeat="adr in addr | filter: {id:res.address_id} | limitTo : 1">{{adr.address_line1}}, {{adr.address_line2}}, {{adr.city}}, {{adr.state}}, {{adr.country}} - {{adr.country}}</span></td>
                             <td style="text-align:center;font-size:12px;">
 	
 								{{res.created_on}}

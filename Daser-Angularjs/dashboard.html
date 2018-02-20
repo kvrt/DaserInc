@@ -38,7 +38,7 @@
                 </thead>
                 <tfoot>
                   <tr>
-                    <th>S.No{{asdf}}sd</th>
+                    <th>S.No</th>
                     <th>Name</th>
 					<th>Organization</th>
                     <th>E - Mail</th>
@@ -51,7 +51,7 @@
                 <tbody>
                     
               
-                        <tr style="background-color:;"  ng-repeat="res in seller | filter: {active: 'Y',signer_type:'Seller'} "  ng-init="setTotals_user(res)">
+                        <tr style="background-color:;"  ng-repeat="res in seller | filter: {active: 'Y',signer_type:'Seller'} | orderBy : '-created_on' "  ng-init="setTotals_user(res)">
                  
         
        
@@ -63,7 +63,7 @@
                     <td><span ng-repeat="orgs in organ | filter: {id:res.org_id}">{{orgs.name}}</span></td>
                     <td>{{res.emailaddress}}</td>
                     <td>{{res.phonenumber}}</td>
-                    <td style="font-size:13px;"><span ng-repeat="adr in addr | filter: {id:res.address_id}">{{adr.address_line1}}, {{adr.address_line2}}, {{adr.city}}, {{adr.state}}, {{adr.country}} - {{adr.country}}</span></td>
+                    <td style="font-size:13px;"><span ng-repeat="adr in addr | filter: {id:res.address_id} | limitTo : 1">{{adr.address_line1}}, {{adr.address_line2}}, {{adr.city}}, {{adr.state}}, {{adr.country}} - {{adr.country}}</span></td>
                             <td style="text-align:center;">
 	<a href="javascript:void(0)" ng-click="seller_individual_appointments(res.id)">						
 							<span ng-repeat="resa in appoint | filter: { seller_user_id: res.id }">

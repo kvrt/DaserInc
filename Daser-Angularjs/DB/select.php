@@ -2,7 +2,7 @@
 //database settings
 include "connectdb.php";
 
-$query="select * from student";
+$query="select * from users";
 //$data = array();
 $rs=$dbhandle->query($query);
 

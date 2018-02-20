@@ -62,10 +62,10 @@
                 <tbody>
                     
               
-                        <tr style="background-color:;" ng-repeat="request in requests"ng-init="setTotals(request)">
+                        <tr style="background-color:;" ng-repeat="request in requests | orderBy : '-created_on' " ng-init="setTotals(request)">
                  
         
-       
+      
                   
                     <td align="center">{{$index+1}}</td>
 
@@ -74,11 +74,11 @@
 					  {{service.description}} - {{request.created_on}}
 					  </span>
 					  </td>
-                    <td><span ng-repeat="user in users | filter: {id:request.user_id}">{{user.first_name}} {{user.last_name}}</span></td>
+                    <td><span ng-repeat="user in users | filter: {id:request.user_id} | limitTo : 1">{{user.first_name}} {{user.last_name}}</span></td>
                     <td>
 					
 					<span ng-if="request.status!='P'">
-                          <span ng-repeat="user in users | filter: {id:request.seller_user_id}">
+                          <span ng-repeat="user in users | filter: {id:request.seller_user_id}  | limitTo : 1">
 						  
 						  <span ng-repeat="org in organ | filter: {id:user.org_id}">
 						  {{org.name}} - <span ng-if="user.active=='Y'" style="color:forestgreen;font-weight:bold;"> Active </span><span ng-if="user.active=='N'" style="font-weight:bold;color:tomato;"> InActive </span>
@@ -104,7 +104,7 @@
                     <td style="text-align:right;">${{request.service_amount}}</td>
                     <td style="text-align:center;"> 
 
-					<span ng-repeat="selleramt in spayment | filter: {seller_id:request.id}">
+					<span ng-repeat="selleramt in spayment | filter: {seller_id:request.id}  | limitTo : 1">
 					<span ng-if="selleramt.id!=''">
 					     <span style="color:forestgreen;"><a href="javascript:void(0)" class="badge badge-success"><i class="fa fa-usd" aria-hidden="true"></i> Paid  </a></span>
                      </span>

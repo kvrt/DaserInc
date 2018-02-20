@@ -46,7 +46,7 @@
                 </tfoot>
                 <tbody>
                     
-                                        <tr style="background-color:;"  ng-repeat="res in userrequest | filter:{status:'I'} ">
+                                        <tr style="background-color:;"  ng-repeat="res in userrequest | filter:{status:'I'} | orderBy : '-created_on' ">
                  
         
        
@@ -58,12 +58,12 @@
 					  {{service.description}} - {{res.created_on}}
 					  </span></td>
                     <td>${{res.service_amount}}</td>
-                    <td><span ng-repeat="user in allappointments | filter: {id:res.user_id}">{{user.first_name}},{{user.last_name}}</span></td>
-                    <td><span ng-repeat="user in allappointments | filter: {id:res.user_id}">{{user.emailaddress}} / {{user.phonenumber}}</span></td>
+                    <td><span ng-repeat="user in allappointments | filter: {id:res.user_id}  | limitTo : 1">{{user.first_name}},{{user.last_name}}</span></td>
+                    <td><span ng-repeat="user in allappointments | filter: {id:res.user_id}  | limitTo : 1">{{user.emailaddress}} / {{user.phonenumber}}</span></td>
                     <td style="font-size:13px;">
 					
-					<span ng-repeat="user in allappointments | filter: {id:res.user_id}">
-					<span ng-repeat="adr in useraddr | filter: {id:user.address_id}">{{adr.address_line1}}, {{adr.address_line2}}, {{adr.city}}, {{adr.state}}, {{adr.country}} - {{adr.country}}</span>
+					<span ng-repeat="user in allappointments | filter: {id:res.user_id}  | limitTo : 1">
+					<span ng-repeat="adr in useraddr | filter: {id:user.address_id}  | limitTo : 1">{{adr.address_line1}}, {{adr.address_line2}}, {{adr.city}}, {{adr.state}}, {{adr.country}} - {{adr.country}}</span>
 					</span>
 					</td>
                             <td style="text-align:center;">
@@ -88,7 +88,7 @@
 					  
 					  <td align="center">
                        
-                          <span ng-repeat="user in allappointments | filter: {id:res.seller_user_id}">
+                          <span ng-repeat="user in allappointments | filter: {id:res.seller_user_id}  | limitTo : 1">
 						  
 						  <span ng-repeat="org in orgname | filter: {id:user.org_id}">
 						  {{org.name}} - <span ng-if="user.active=='Y'" style="color:forestgreen;font-weight:bold;"> Active </span><span ng-if="user.active=='N'" style="font-weight:bold;color:tomato;"> InActive </span>

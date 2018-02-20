@@ -1,7 +1,7 @@
 <?php
 include "connectdb.php";
 
-//$data=json_decode(file_get_contents("php://input"));
+//$data=json_decode(file_get_contents("php://input")); 8275.86
 //$user=$dbhandle->real_escape_string($data->users);
 //echo($user."aaaaaaaaaa");
 

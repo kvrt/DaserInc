@@ -47,7 +47,7 @@
                 <tbody>
                     
               
-                        <tr style="background-color:;"  ng-repeat="res in seller | filter: {active: 'Y',signer_type:'Buyer'} ">
+                        <tr style="background-color:;"  ng-repeat="res in seller | filter: {active: 'Y',signer_type:'Buyer' } | orderBy : '-created_on' ">
                  
         
        
@@ -58,7 +58,7 @@
                       <td style="font-size:13px;">{{res.first_name}} {{res.last_name}}</td>
                     <td>{{res.emailaddress}}</td>
                     <td>{{res.phonenumber}}</td>
-                    <td style="font-size:13px;"><span ng-repeat="adr in addr | filter: {id:res.address_id}">{{adr.address_line1}}, {{adr.address_line2}}, {{adr.city}}, {{adr.state}}, {{adr.country}} - {{adr.country}}</span></td>
+                    <td style="font-size:13px;"><span ng-repeat="adr in addr | filter: {id:res.address_id} | limitTo : 1">{{adr.address_line1}}, {{adr.address_line2}}, {{adr.city}}, {{adr.state}}, {{adr.country}} - {{adr.country}}</span></td>
                             <td style="text-align:center;font-size:12px;">
 	<a href="javascript:void(0)" ng-click="buyer_individual_appointments(res.id)">
 <span ng-repeat="resa in appoint | filter: { user_id: res.id }">
@@ -66,7 +66,9 @@
 
 									<div ng-if="$last == true">
         {{$index+1}}
-    </div>						<div ng-if="appoint.length == '' ">
+    </div>	
+			
+	<div ng-if="appoint.length == '' ">
         0
     </div>
 							</span>

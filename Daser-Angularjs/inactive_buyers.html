@@ -44,7 +44,7 @@
                 </tfoot>
                 <tbody>
                     
-                        <tr style="background-color:;"  ng-repeat="res in seller | filter: {active: 'N',signer_type:'Buyer'} ">
+                        <tr style="background-color:;"  ng-repeat="res in seller | filter: {active: 'N',signer_type:'Buyer' } | orderBy : '-created_on' ">
                  
         
        
@@ -55,7 +55,7 @@
                       <td style="font-size:13px;">{{res.first_name}} {{res.last_name}}</td>
                     <td>{{res.emailaddress}}</td>
                     <td>{{res.phonenumber}}</td>
-                    <td style="font-size:13px;"><span ng-repeat="adr in addr | filter: {id:res.address_id}">{{adr.address_line1}}, {{adr.address_line2}}, {{adr.city}}, {{adr.state}}, {{adr.country}} - {{adr.country}}</span></td>
+                    <td style="font-size:13px;"><span ng-repeat="adr in addr | filter: {id:res.address_id} | limitTo : 1">{{adr.address_line1}}, {{adr.address_line2}}, {{adr.city}}, {{adr.state}}, {{adr.country}} - {{adr.country}}</span></td>
                             <td style="text-align:center;font-size:12px;">
 	{{res.created_on}}
 							</td>
