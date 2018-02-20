@@ -9,10 +9,15 @@ import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.stripe.android.Stripe;
+import com.stripe.android.TokenCallback;
+import com.stripe.android.model.BankAccount;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,9 +34,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class Emailconfirmation extends AppCompatActivity {
+public class seller_bank_add extends AppCompatActivity {
     TextView otp;
-    EditText uotp;
+    EditText acno,rno,ty;
     String uid_dy;
     TextView tx;
     private ProgressDialog progressDialog;
@@ -39,7 +44,7 @@ public class Emailconfirmation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_emailconfirmation);
+        setContentView(R.layout.activity_seller_bank_add);
         tx = (TextView) findViewById(R.id.text1);
 
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/alegreya-sans-sc.bold.ttf");
@@ -49,23 +54,63 @@ public class Emailconfirmation extends AppCompatActivity {
         ab.setLogo(R.mipmap.final_logo);
         ab.setDisplayUseLogoEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
-        ab.setTitle(" Email Confirmation");
+        ab.setTitle(" Add Bank Details");
 
         //otp=(TextView)findViewById(R.id.text1);
-
-        uotp=(EditText)findViewById(R.id.otp);
+        acno=(EditText)findViewById(R.id.acnum);
+        rno=(EditText)findViewById(R.id.routenum);
+        ty=(EditText)findViewById(R.id.actype);
 
         Globalvariables_set gbl=((Globalvariables_set)getApplicationContext());
         uid_dy=gbl.getSignup_userid();
         ///otp.setText(ui);
     }
 
-    public void emailotp(View view)
+    public void addbankaccount(View view)
     {
-        String otp_s=uotp.getText().toString();
-        String userid_s=uid_dy.toString();
 
-        new Emailconfirmation.BackgroundWorkers().execute(userid_s,otp_s);
+        if (acno.getText().toString().isEmpty()) {
+            Toast.makeText(this,"Account number should not empty.!",Toast.LENGTH_LONG).show();
+        }
+        else if (rno.getText().toString().isEmpty()) {
+            Toast.makeText(this,"Routing number should not empty.!",Toast.LENGTH_LONG).show();
+
+        }
+        // else if(ty.getText().toString().isEmpty() || !ty.getText().toString().equals("individual") || !ty.getText().toString().equals("company"))
+        // {
+        //    Toast.makeText(this,"Account type should not empty. And it should be ' individual ' or ' company ' only!",Toast.LENGTH_LONG).show();
+        // }
+        else {
+
+
+
+            new seller_bank_add.BackgroundWorkers().execute(uid_dy.toString(),acno.getText().toString(),rno.getText().toString(),ty.getText().toString());
+
+
+/*
+            Stripe stripe = new Stripe(this);
+
+            stripe.setDefaultPublishableKey("pk_test_eu5vgSNxVXBVTWNqHxQNKVls");
+            BankAccount bankAccount = new BankAccount(acno.getText().toString(), "US", "usd","US","US","US","US", rno.getText().toString());
+            stripe.createBankAccountToken(bankAccount, new TokenCallback() {
+                @Override
+                public void onError(Exception error) {
+                    Log.e("Stripe Error", error.getMessage());
+
+                    Toast.makeText(getApplicationContext(),"Unable to create bank token, error is : "+error.getMessage(),Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onSuccess(com.stripe.android.model.Token token) {
+                    Log.e("Bank Token", token.getId());
+
+                    acno.setText(token.getId().toString());
+                    new seller_bank_add.BackgroundWorkers().execute(uid_dy.toString(),token.getId().toString());
+
+                }
+            });*/
+        }
+
 
         //insertdata();
     }
@@ -90,7 +135,7 @@ public class Emailconfirmation extends AppCompatActivity {
 
             //String confirmemail_url="http://10.0.2.2:2426/Androidservices/emailconfirm";
             //  String confirmemail_url="http://noticeperiod.com/Androidservices/emailconfirm";
-            String confirmemail_url="http://10.0.2.2:4001/customer/emailconfirmation";
+            String confirmemail_url="http://10.0.2.2:4001/customer/addbankdetails";
 
 
             //  if(type.equals("login"))
@@ -98,7 +143,10 @@ public class Emailconfirmation extends AppCompatActivity {
             try {
 
                 String id = params[0].toString();
-                String numcode = params[1].toString();
+                String accountno = params[1].toString();
+                String accountrno = params[2].toString();
+                String accountty = params[3].toString();
+
 
                 URL url=new URL(confirmemail_url);
                 HttpURLConnection httpsURLConnection=(HttpURLConnection) url.openConnection();
@@ -107,7 +155,7 @@ public class Emailconfirmation extends AppCompatActivity {
                 httpsURLConnection.setDoInput(true);
                 OutputStream outputStream=httpsURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data= URLEncoder.encode("uid","UTF-8")+"="+URLEncoder.encode(id,"UTF-8")+"&"+URLEncoder.encode("otpcode","UTF-8")+"="+URLEncoder.encode(numcode,"UTF-8");
+                String post_data= URLEncoder.encode("uid","UTF-8")+"="+URLEncoder.encode(id,"UTF-8")+"&"+URLEncoder.encode("acno","UTF-8")+"="+URLEncoder.encode(accountno,"UTF-8")+"&"+URLEncoder.encode("rcno","UTF-8")+"="+URLEncoder.encode(accountrno,"UTF-8")+"&"+URLEncoder.encode("btype","UTF-8")+"="+URLEncoder.encode(accountty,"UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -166,8 +214,8 @@ public class Emailconfirmation extends AppCompatActivity {
 */
 
 
-            progressDialog = ProgressDialog.show(Emailconfirmation.this,"Loading...",
-                    "Confirming email, please wait...", false, false);
+            progressDialog = ProgressDialog.show(seller_bank_add.this,"Loading...",
+                    "Bank details adding, please wait...", false, false);
 
 
         }
@@ -175,37 +223,28 @@ public class Emailconfirmation extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             progressDialog.dismiss();
-            // tx.setText(result);
+
             JSONObject jsonObject= null;
             try {
                 jsonObject = new JSONObject(result);
 
                 String ii=jsonObject.getString("code");
-                String signertype=jsonObject.getString("stype");
 
                 //Integer ii=jsonObject.getInt("code");
 
-
+                tx.setText(ii);
 
                 if(ii.equals("1"))
                 {
 
-                    if(signertype.equals("Buyer")) {
-                        Toast.makeText(getApplicationContext(), "Email Confirmed Successfully...", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-                    }
-                    if(signertype.equals("Seller")) {
-                        Toast.makeText(getApplicationContext(), "Email Confirmed Successfully... Please add bank account details", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(getApplicationContext(), seller_bank_add.class);
-                        startActivity(intent);
-                    }
-
+                    Toast.makeText(getApplicationContext(), "Bank account added successfully...", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
 
                 }
                 else if(ii.equals("0"))
                 {
-                    Toast.makeText(getApplicationContext(),"Invalid OTP. Please try again...",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Unable to proceed. Please try again...",Toast.LENGTH_LONG).show();
 
                 }
             } catch (JSONException e) {

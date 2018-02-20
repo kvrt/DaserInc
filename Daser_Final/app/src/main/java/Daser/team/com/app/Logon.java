@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import java.util.HashMap;
 
 public class Logon extends AppCompatActivity
@@ -52,6 +54,7 @@ public class Logon extends AppCompatActivity
 
 
 
+
         View hView =  navigationView.getHeaderView(0);
         TextView nav_user = (TextView)hView.findViewById(R.id.logonname);
         nav_user.setText("Username : "+name+" "+lname);
@@ -59,16 +62,19 @@ public class Logon extends AppCompatActivity
         nav_usertype.setText("Signer Type : "+type);
 
         Menu nav_Menu = navigationView.getMenu();
+
+
+        displayselectedscreen(R.id.nav_gallery);
         if(type.equals("Seller"))
         {
-            nav_Menu.findItem(R.id.nav_slideshow).setVisible(false);
-            displayselectedscreen(R.id.nav_gallery);
-        }
-        else
-        {
-            displayselectedscreen(R.id.nav_slideshow);
+           nav_Menu.findItem(R.id.nav_slideshow).setVisible(false);
 
         }
+      // else
+      // {
+      //      displayselectedscreen(R.id.nav_slideshow);
+
+      // }
 
 
 

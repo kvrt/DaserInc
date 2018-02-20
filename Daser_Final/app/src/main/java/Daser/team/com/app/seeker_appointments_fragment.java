@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,7 +50,7 @@ public class seeker_appointments_fragment extends Fragment {
     //public static final int READ_TIMEOUT = 15000000;
     private RecyclerView mRVFishPrice;
     private AdapterAppointments mAdapter;
-    String id,type,token;
+    String id,type,token,refreshedToken;
     SessionManagement sessionManagement;
     Activity act=getActivity();
     //EditText orgg;
@@ -59,6 +61,9 @@ public class seeker_appointments_fragment extends Fragment {
         //inflater.inflate(R.layout.fragement1,container,false);
         mRVFishPrice = (RecyclerView)v.findViewById(R.id.appointments);
         // orgg = (EditText)v.findViewById(R.id.org);
+
+       refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        //Toast.makeText(getActivity(),"token : "+refreshedToken,Toast.LENGTH_LONG).show();
         //orgg.setEnabled(false);
         new AsyncLogin().execute();
 
@@ -172,7 +177,7 @@ public class seeker_appointments_fragment extends Fragment {
                 conn.setDoOutput(true);
                 OutputStream outputStream=conn.getOutputStream();
                 BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data= URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(id,"UTF-8")+"&"+URLEncoder.encode("type","UTF-8")+"="+URLEncoder.encode(type,"UTF-8")+"&"+URLEncoder.encode("token","UTF-8")+"="+URLEncoder.encode(token,"UTF-8");
+                String post_data= URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(id,"UTF-8")+"&"+URLEncoder.encode("type","UTF-8")+"="+URLEncoder.encode(type,"UTF-8")+"&"+URLEncoder.encode("token","UTF-8")+"="+URLEncoder.encode(token,"UTF-8")+"&"+URLEncoder.encode("deviceid","UTF-8")+"="+URLEncoder.encode(refreshedToken,"UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -238,31 +243,48 @@ public class seeker_appointments_fragment extends Fragment {
             pdLoading.dismiss();
             try {
 
+
                 JSONObject jsonObj = new JSONObject(result);
+
+
+
 
                 JSONArray jArray = jsonObj.getJSONArray("data");
 
                 // Extract data from json and store into ArrayList as class objects
-                for(int i=0;i<jArray.length();i++){
+                for (int i = 0; i < jArray.length(); i++) {
                     JSONObject json_data = jArray.getJSONObject(i);
+
+
+                    String ii = json_data.getString("code");
+
+                    if (ii.equals("404")) {
+                        Toast.makeText(getActivity(), "Session is expired...", Toast.LENGTH_LONG).show();
+                        sessionManagement.logout();
+
+                    }
+                    else
+                    {
+
                     DataAppointments fishData = new DataAppointments();
                     //fishData.fishImage= json_data.getString("fish_img");
-                    fishData.username= json_data.getString("fname")+" "+json_data.getString("lname");
-                    fishData.dateofservice= json_data.getString("service_date");
-                    fishData.description= json_data.getString("servicetype");
-                    fishData.address11= json_data.getString("address1")+" "+json_data.getString("address2")+" "+json_data.getString("city");
-                    fishData.address22= json_data.getString("state")+" "+json_data.getString("country")+" "+json_data.getString("zip");
+                    fishData.username = json_data.getString("fname") + " " + json_data.getString("lname");
+                    fishData.dateofservice = json_data.getString("service_date");
+                    fishData.description = json_data.getString("servicetype");
+                    fishData.address11 = json_data.getString("address1") + " " + json_data.getString("address2") + " " + json_data.getString("city");
+                    fishData.address22 = json_data.getString("state") + " " + json_data.getString("country") + " " + json_data.getString("zip");
 
-                    fishData.org= json_data.getString("organisation");
-                    fishData.status= json_data.getString("status");
-                    fishData.price_status= json_data.getString("amount");
-                    fishData.email= json_data.getString("mail");
-                    fishData.mobile= json_data.getString("phone");
-                    fishData.recordid= json_data.getString("id");
-                    fishData.selleruid= json_data.getString("sellerid");
+                    fishData.org = json_data.getString("organisation");
+                    fishData.status = json_data.getString("status");
+                    fishData.price_status = json_data.getString("amount");
+                    fishData.email = json_data.getString("mail");
+                    fishData.mobile = json_data.getString("phone");
+                    fishData.recordid = json_data.getString("id");
+                    fishData.selleruid = json_data.getString("sellerid");
 
 
                     data.add(fishData);
+                }
                 }
 
                 // Setup and Handover data to recyclerview

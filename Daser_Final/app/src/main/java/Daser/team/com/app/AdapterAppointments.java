@@ -86,15 +86,15 @@ public class AdapterAppointments extends RecyclerView.Adapter<RecyclerView.ViewH
         //myHolder.orgs.setText(current.org);
 
 
-        //if((current.org).equals("") || (current.org).equals("0") )
-        //{
-          //  myHolder.orgs.setText("Not Yet Assign");
+        if((current.selleruid).equals("") || (current.selleruid).equals("0") )
+        {
+            myHolder.orgs.setText("Not Yet Assign");
 
-        //}
-        //else
-        //{
+        }
+        else
+        {
             myHolder.orgs.setText(current.org);
-      //  }
+        }
 
         String q="<font color='black'>"+current.description+"</font> [<font color='#606060'> "+current.mobile+" - "+current.email+"</font> ]";
         String qq="<font color='#606060'><br/>"+current.address11+" "+current.address22+"\n</font>";

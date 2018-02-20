@@ -9,10 +9,13 @@ import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -186,6 +189,13 @@ public class Service_provider_signup extends AppCompatActivity {
                 String s_dobs = params[11].toString();
                 String s_orgnn = params[12].toString();
 
+
+                String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
+
+
+               // username.setText(refreshedToken);
+
                 URL url = new URL(login_url);
                 HttpURLConnection httpsURLConnection = (HttpURLConnection) url.openConnection();
                 httpsURLConnection.setRequestMethod("POST");
@@ -193,7 +203,7 @@ public class Service_provider_signup extends AppCompatActivity {
                 httpsURLConnection.setDoInput(true);
                 OutputStream outputStream = httpsURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("signer", "UTF-8") + "=" + URLEncoder.encode("Seller", "UTF-8") + "&" + URLEncoder.encode("phone", "UTF-8") + "=" + URLEncoder.encode(s_phone, "UTF-8")+ "&" + URLEncoder.encode("fname", "UTF-8") + "=" + URLEncoder.encode(s_fname, "UTF-8")+ "&" + URLEncoder.encode("lname", "UTF-8") + "=" + URLEncoder.encode(s_lname, "UTF-8")+ "&" + URLEncoder.encode("dob", "UTF-8") + "=" + URLEncoder.encode(s_dobs, "UTF-8")+ "&" + URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(s_email, "UTF-8")+ "&" + URLEncoder.encode("pass", "UTF-8") + "=" + URLEncoder.encode(s_pass, "UTF-8")+ "&" + URLEncoder.encode("addr1", "UTF-8") + "=" + URLEncoder.encode(s_addr1, "UTF-8")+ "&" + URLEncoder.encode("addr2", "UTF-8") + "=" + URLEncoder.encode(s_addr2, "UTF-8")+ "&" + URLEncoder.encode("city", "UTF-8") + "=" + URLEncoder.encode(s_city, "UTF-8")+ "&" + URLEncoder.encode("state", "UTF-8") + "=" + URLEncoder.encode(s_state, "UTF-8")+ "&" + URLEncoder.encode("zip", "UTF-8") + "=" + URLEncoder.encode(s_zipcode, "UTF-8")+ "&" + URLEncoder.encode("country", "UTF-8") + "=" + URLEncoder.encode(s_country, "UTF-8")+ "&" + URLEncoder.encode("orgname", "UTF-8") + "=" + URLEncoder.encode(s_orgnn, "UTF-8");
+                String post_data = URLEncoder.encode("signer", "UTF-8") + "=" + URLEncoder.encode("Seller", "UTF-8") + "&" + URLEncoder.encode("phone", "UTF-8") + "=" + URLEncoder.encode(s_phone, "UTF-8")+ "&" + URLEncoder.encode("fname", "UTF-8") + "=" + URLEncoder.encode(s_fname, "UTF-8")+ "&" + URLEncoder.encode("lname", "UTF-8") + "=" + URLEncoder.encode(s_lname, "UTF-8")+ "&" + URLEncoder.encode("dob", "UTF-8") + "=" + URLEncoder.encode(s_dobs, "UTF-8")+ "&" + URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(s_email, "UTF-8")+ "&" + URLEncoder.encode("pass", "UTF-8") + "=" + URLEncoder.encode(s_pass, "UTF-8")+ "&" + URLEncoder.encode("addr1", "UTF-8") + "=" + URLEncoder.encode(s_addr1, "UTF-8")+ "&" + URLEncoder.encode("addr2", "UTF-8") + "=" + URLEncoder.encode(s_addr2, "UTF-8")+ "&" + URLEncoder.encode("city", "UTF-8") + "=" + URLEncoder.encode(s_city, "UTF-8")+ "&" + URLEncoder.encode("state", "UTF-8") + "=" + URLEncoder.encode(s_state, "UTF-8")+ "&" + URLEncoder.encode("zip", "UTF-8") + "=" + URLEncoder.encode(s_zipcode, "UTF-8")+ "&" + URLEncoder.encode("country", "UTF-8") + "=" + URLEncoder.encode(s_country, "UTF-8")+ "&" + URLEncoder.encode("orgname", "UTF-8") + "=" + URLEncoder.encode(s_orgnn, "UTF-8")+ "&" + URLEncoder.encode("deviceid", "UTF-8") + "=" + URLEncoder.encode(refreshedToken, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();

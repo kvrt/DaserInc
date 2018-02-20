@@ -4,525 +4,282 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" >
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="Daser.team.com.app.schedule_appointment">
-
-
-
-
-    <LinearLayout
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@android:color/white"
-
-        >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:id="@+id/text1"
-        android:text=" Schedule Appointment"
-        android:textStyle="bold"
-        android:textSize="30dp"
-        android:layout_marginTop="10dp"
-        android:textColor="@android:color/black"
+        tools:context="Daser.team.com.app.schedule_appointment">
 
 
-        />
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@drawable/rectangle"
-            android:id="@+id/oldaddr"
+            android:background="@android:color/white"
+
             >
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="140dp">
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="15dp"
-                android:textSize="18dp"
-                android:fontFamily="serif"
-                android:textColor="#606060"
-                android:id="@+id/eaddr"
-                android:text="Existing Address "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/text1"
+                android:text=" Schedule Appointment"
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"
+
+
                 />
-            </ScrollView>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:background="@drawable/rectangle"
+                android:id="@+id/oldaddr"
+                >
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginTop="15dp"
+                        android:textSize="18dp"
+                        android:fontFamily="serif"
+                        android:textColor="#606060"
+                        android:id="@+id/eaddr"
+                        android:text="Existing Address "
+                        />
+                </ScrollView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#c0c0c0"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/addr"
+                    android:textColor="#0066FF"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:textSize="18dp"
+                    android:fontFamily="serif"
+                    android:layout_gravity="end"
+                    android:id="@+id/newaddr"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/adrhv"
+                    android:text="0"
+                    android:visibility="visible"
+                    />
+
+
+
+
+
+            </LinearLayout>
+
+
+            <!--     <Spinner
+                     android:id="@+id/spinner"
+                     android:layout_width="match_parent"
+                     android:layout_height="40dp"
+                     android:prompt="Choose Service"
+                     android:layout_marginLeft="15dp"
+                     android:layout_marginRight="15dp"
+                     android:layout_marginTop="15dp"
+                     />
+         -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:id="@+id/newadd"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Address"
+                        android:textColor="#0066FF"
+                        android:fontFamily="serif"
+                        android:textSize="20dp"
+                        android:layout_alignParentLeft="true"
+                        android:id="@+id/addr"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Keep Old Address"
+                        android:textSize="15dp"
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/old"
+                        android:onClick="home"
+                        />
+                </RelativeLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="Address Line1"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/addr1"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="Address Line2"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/addr2"
+                        />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="State"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/state"
+                        />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="City"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/city"
+                        />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="Zipcode"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/zcode"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="Country"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/country"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+
+
+            </LinearLayout>
+            <!--
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/editlayoutborders"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
+                        android:prompt="@string/servicename"/>-->
+            <TextView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose Service Type"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"/>
+
+            <Spinner android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="10dp"
-                android:background="#c0c0c0"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/addr"
-                android:textColor="#0066FF"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="5dp"
-                android:textSize="18dp"
-                android:fontFamily="serif"
-                android:layout_gravity="end"
-                android:id="@+id/newaddr"
-                />
-<EditText
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/adrhv"
-    android:text="0"
-    android:visibility="visible"
-    />
-        </LinearLayout>
-
-
-   <!--     <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:prompt="Choose Service"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="15dp"
-            />
--->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="15dp"
-            android:orientation="vertical"
-            android:id="@+id/newadd"
-            >
-
-            <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
-
-
-
-    <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Address"
-                android:textColor="#0066FF"
-                android:fontFamily="serif"
-                android:textSize="20dp"
-                android:layout_alignParentLeft="true"
-                android:id="@+id/addr"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Keep Old Address"
-                android:textSize="15dp"
-                android:layout_alignParentRight="true"
-                android:id="@+id/old"
-                android:onClick="home"
-                />
-</RelativeLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="Address Line1"
-                android:layout_marginTop="10dp"
-                android:id="@+id/addr1"
-                />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="Address Line2"
-                android:layout_marginTop="10dp"
-                android:id="@+id/addr2"
-                />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:hint="State"
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/state"
-                    />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:hint="City"
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/city"
-                    />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:hint="Zipcode"
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/zcode"
-                    />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:hint="Country"
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/country"
-                    />
-            </android.support.design.widget.TextInputLayout>
-
-
-
-        </LinearLayout>
-<!--
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/editlayoutborders"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
-            android:prompt="@string/servicename"/>-->
-        <TextView android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Choose Service Type"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
-
-        <Spinner android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="5dp"
-
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:background="#c0c0c0"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
-        android:orientation="vertical"
-        android:id="@+id/dynamic">
-
-
-        </LinearLayout>
-
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-
-                android:hint="Date"
-                android:drawableLeft="@mipmap/ic_date_range_black_24dp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/counter"
-                />
-        </android.support.design.widget.TextInputLayout>
-
-
-
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:hint="Date"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-
-                android:drawableLeft="@mipmap/ic_date_range_black_24dp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/date"
-                />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="time"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-
-                android:hint="Time"
-                android:drawableLeft="@mipmap/ic_access_time_black_24dp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/time"
-                />
-        </android.support.design.widget.TextInputLayout>
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Get Quote"
-    android:layout_gravity="end"
-    android:layout_marginBottom="15dp"
-    android:layout_marginTop="15dp"
-
-    android:layout_marginRight="15dp"
-    android:id="@+id/quote"
-    />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="left"
-            android:text="Calculation : "
-            android:textSize="18dp"
-            android:id="@+id/calcu1"
-
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
-            android:textAlignment="textEnd"
-            android:textSize="18dp"
-            android:id="@+id/calcu"
-
-            />
-
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="Card token"
-                android:visibility="gone"
-
-                android:id="@+id/tkn1"
-                />
-        </android.support.design.widget.TextInputLayout>
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="Card token"
-                android:visibility="gone"
-
-                android:id="@+id/tkn2"
-                />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="Card token"
-                android:visibility="gone"
-
-                android:id="@+id/tkn3"
-                />
-        </android.support.design.widget.TextInputLayout>
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="Card token"
-                android:visibility="gone"
-
-                android:id="@+id/tkn4"
-                />
-        </android.support.design.widget.TextInputLayout>
-
-
-
-
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
-        android:orientation="vertical"
-        android:visibility="gone"
-        android:id="@+id/existcardinfo">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Existing Card Details : "
-            android:textSize="18dp"
-            android:id="@+id/existcard"
-
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:textAlignment="viewEnd"
-            android:text="Update Card Details "
-            android:textSize="12dp"
-            android:textColor="@android:color/holo_blue_dark"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="5dp"
-            android:id="@+id/updcard"
-
-            />
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Card Type :  "
-            android:textSize="18dp"
-            android:id="@+id/crdty"
-
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Card Number :  "
-            android:textSize="18dp"
-            android:id="@+id/crddgts"
-
-            />
-
-
-
-
-
-    </LinearLayout>
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="Card token"
-                android:visibility="gone"
-
-                android:id="@+id/cardtkn"
-                />
-        </android.support.design.widget.TextInputLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="15dp"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:id="@+id/cardinfo">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Add Card Details : "
-            android:textSize="18dp"
-            android:id="@+id/pay"
-
-            />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:textAlignment="viewEnd"
-                android:text="Keep Existing Card"
-                android:textSize="12dp"
-                android:textColor="@android:color/holo_blue_dark"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="5dp"
-                android:id="@+id/existngcard"
 
-                />
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#c0c0c0"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:id="@+id/dynamic_serviceid">
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:id="@+id/dynamic">
+
+
+            </LinearLayout>
+
+
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -531,84 +288,344 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:hint="Card Status"
+
+                    android:hint="Date"
+                    android:drawableLeft="@mipmap/ic_date_range_black_24dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/counter"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+
+
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:hint="Date"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+
+                    android:drawableLeft="@mipmap/ic_date_range_black_24dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/date"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="time"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+
+                    android:hint="Time"
+                    android:drawableLeft="@mipmap/ic_access_time_black_24dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/time"
+                    />
+            </android.support.design.widget.TextInputLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get Quote"
+                android:layout_gravity="end"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+
+                android:layout_marginRight="15dp"
+                android:id="@+id/quote"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="left"
+                android:text="Calculation : "
+                android:textSize="18dp"
+                android:id="@+id/calcu1"
+
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:textAlignment="textEnd"
+                android:textSize="18dp"
+                android:id="@+id/calcu"
+
+                />
+
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Card token"
                     android:visibility="gone"
-                    android:text="0"
-                    android:id="@+id/cardstatus"
+
+                    android:id="@+id/tkn1"
                     />
             </android.support.design.widget.TextInputLayout>
 
 
             <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Card token"
+                    android:visibility="gone"
+
+                    android:id="@+id/tkn2"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Card token"
+                    android:visibility="gone"
+
+                    android:id="@+id/tkn3"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Card token"
+                    android:visibility="gone"
+
+                    android:id="@+id/tkn4"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="Card Number"
-                android:id="@+id/card"
-                />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:id="@+id/existcardinfo">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="Existing Card Details : "
+                    android:textSize="18dp"
+                    android:id="@+id/existcard"
+
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:textAlignment="viewEnd"
+                    android:text="Update Card Details "
+                    android:textSize="12dp"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/updcard"
+
+                    />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="Card Type :  "
+                    android:textSize="18dp"
+                    android:id="@+id/crdty"
+
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="Card Number :  "
+                    android:textSize="18dp"
+                    android:id="@+id/crddgts"
+
+                    />
+
+
+
+
+
+            </LinearLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Card token"
+                    android:visibility="gone"
+
+                    android:id="@+id/cardtkn"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="Exp Month"
-                android:id="@+id/expm"
-                />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:id="@+id/cardinfo">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="Add Card Details : "
+                    android:textSize="18dp"
+                    android:id="@+id/pay"
+
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:textAlignment="viewEnd"
+                    android:text="Keep Existing Card"
+                    android:textSize="12dp"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/existngcard"
+
+                    />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="Card Status"
+                        android:visibility="gone"
+                        android:text="0"
+                        android:id="@+id/cardstatus"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:hint="Card Number"
+                        android:id="@+id/card"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:hint="Exp Month"
+                        android:id="@+id/expm"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:hint="Exp Year"
+                        android:id="@+id/expy"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:hint="CVC"
+
+                        android:id="@+id/cvc"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="Exp Year"
-                android:id="@+id/expy"
-                />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="CVC"
-
-                android:id="@+id/cvc"
-                />
-        </android.support.design.widget.TextInputLayout>
-
-</LinearLayout>
+                android:textStyle="bold"
+                android:background="#ffa382"
 
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:background="#ffa382"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
 
 
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
+                android:textColor="@android:color/white"
+                android:text="submit"
+                android:id="@+id/schedule_submit"/>
 
+        </LinearLayout>
 
-            android:textColor="@android:color/white"
-            android:text="submit"
-            android:id="@+id/schedule_submit"/>
-
-    </LinearLayout>
-
-</RelativeLayout>
+    </RelativeLayout>
 </ScrollView>

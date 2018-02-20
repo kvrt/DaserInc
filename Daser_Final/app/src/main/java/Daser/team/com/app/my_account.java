@@ -42,14 +42,14 @@ import java.util.StringTokenizer;
 public class my_account extends Fragment {
     private ProgressDialog progressDialog;
     SessionManagement sessionManagement;
-    String id,type,token,name,phonea,doba,addr1a,addr2a,citya,statea,countrya,zipa,orgnm,emaila,lnamea;
+    String id,type,token,name,phonea,doba,addr1a,addr2a,citya,statea,countrya,zipa,orgnm,emaila,lnamea,stripeid,addressid;
     String idq,typeq,tokenq,nameq,phoneaq,dobaq,addr1aq,addr2aq,cityaq,stateaq,countryaq,zipaq,orgnmq,emailaq,lnameaq;
 
 //String url_myaccount="http://10.0.2.2:2426/Androidservices/myaccount";
-   //String url="http://noticeperiod.com/Androidservices/getservices";
-   // String url_myaccount="http://noticeperiod.com/Androidservices/myaccount";
+    //String url="http://noticeperiod.com/Androidservices/getservices";
+    // String url_myaccount="http://noticeperiod.com/Androidservices/myaccount";
 
-EditText country,state,fname,lname,email,phone,dob,orgn,addr1,addr2,city,zipcode;
+    EditText country,state,fname,lname,email,phone,dob,orgn,addr1,addr2,city,zipcode;
     TextView tx;
     Activity act=getActivity();
     @Nullable
@@ -72,7 +72,7 @@ EditText country,state,fname,lname,email,phone,dob,orgn,addr1,addr2,city,zipcode
         addr2 = (EditText)v.findViewById(R.id.addr2);
         city = (EditText)v.findViewById(R.id.city);
         zipcode = (EditText)v.findViewById(R.id.zcode);
-email.setEnabled(false);
+        email.setEnabled(false);
         Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(),  "fonts/alegreya-sans-sc.bold.ttf");
         tx.setTypeface(custom_font);
 
@@ -80,7 +80,7 @@ email.setEnabled(false);
         sessionManagement=new SessionManagement(getActivity().getApplicationContext());
         HashMap<String, String> user = sessionManagement.getdata();
 
-         id = user.get(SessionManagement.KEY_id);
+        id = user.get(SessionManagement.KEY_id);
         type = user.get(SessionManagement.KEY_type);
         token = user.get(SessionManagement.KEY_token);
         name = user.get(SessionManagement.KEY_name);
@@ -95,6 +95,8 @@ email.setEnabled(false);
         phonea = user.get(SessionManagement.KEY_phone);
         emaila = user.get(SessionManagement.KEY_email);
         orgnm = user.get(SessionManagement.KEY_org);
+        stripeid = user.get(SessionManagement.KEY_stripeid);
+        addressid = user.get(SessionManagement.KEY_addrid);
 
 
         fname.setText(name);
@@ -150,7 +152,7 @@ email.setEnabled(false);
 
 
 //                Intent intent = new Intent(getActivity(), Logon.class);
-  //              startActivity(intent);
+                //              startActivity(intent);
 
                 //  Toast.makeText(getApplicationContext(),"Frament button is clicked",Toast.LENGTH_LONG).show();
                 // Toast.makeText(getApplicationContext(), "This is a plain toast.", Toast.LENGTH_SHORT).show();
@@ -195,78 +197,78 @@ email.setEnabled(false);
 
             //String login_url="http://10.0.2.2:2426/Androidservices/myaccount_update";
             //String login_url="http://noticeperiod.com/Androidservices/myaccount_update";
-             String login_url="http://10.0.2.2:4001/customer/accountupdate";
+            String login_url="http://10.0.2.2:4001/customer/accountupdate";
 
             //if(type.equals("login"))
             //{
-                try {
-                    String id1=params[0].toString();
-                    String type1 = params[1].toString();
-                    String fname1 = params[2].toString();
-                    String lname1 = params[3].toString();
-                    String dob1 = params[4].toString();
-                    String phone1 = params[5].toString();
-                    String orgn1 = params[6].toString();
-                    String addr11 = params[7].toString();
-                    String addr21 = params[8].toString();
-                    String state1 = params[9].toString();
-                    String city1 = params[10].toString();
-                    String zipcode1 = params[11].toString();
-                    String country1 = params[12].toString();
-                    String token1 = params[13].toString();
+            try {
+                String id1=params[0].toString();
+                String type1 = params[1].toString();
+                String fname1 = params[2].toString();
+                String lname1 = params[3].toString();
+                String dob1 = params[4].toString();
+                String phone1 = params[5].toString();
+                String orgn1 = params[6].toString();
+                String addr11 = params[7].toString();
+                String addr21 = params[8].toString();
+                String state1 = params[9].toString();
+                String city1 = params[10].toString();
+                String zipcode1 = params[11].toString();
+                String country1 = params[12].toString();
+                String token1 = params[13].toString();
 
-                    URL url=new URL(login_url);
-                    HttpURLConnection httpsURLConnection=(HttpURLConnection) url.openConnection();
-                    httpsURLConnection.setRequestMethod("POST");
-                    httpsURLConnection.setDoOutput(true);
-                    httpsURLConnection.setDoInput(true);
-                    OutputStream outputStream=httpsURLConnection.getOutputStream();
-                    BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data= URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(id1,"UTF-8")+"&"+URLEncoder.encode("type","UTF-8")+"="+URLEncoder.encode(type1,"UTF-8")+"&"+URLEncoder.encode("fname","UTF-8")+"="+URLEncoder.encode(fname1,"UTF-8")+"&"+URLEncoder.encode("lname","UTF-8")+"="+URLEncoder.encode(lname1,"UTF-8")+"&"+URLEncoder.encode("dob","UTF-8")+"="+URLEncoder.encode(dob1,"UTF-8")+"&"+URLEncoder.encode("phone","UTF-8")+"="+URLEncoder.encode(phone1,"UTF-8")+"&"+URLEncoder.encode("orgn","UTF-8")+"="+URLEncoder.encode(orgn1,"UTF-8")+"&"+URLEncoder.encode("addr1","UTF-8")+"="+URLEncoder.encode(addr11,"UTF-8")+"&"+URLEncoder.encode("addr2","UTF-8")+"="+URLEncoder.encode(addr21,"UTF-8")+"&"+URLEncoder.encode("state","UTF-8")+"="+URLEncoder.encode(state1,"UTF-8")+"&"+URLEncoder.encode("city","UTF-8")+"="+URLEncoder.encode(city1,"UTF-8")+"&"+URLEncoder.encode("zipcode","UTF-8")+"="+URLEncoder.encode(zipcode1,"UTF-8")+"&"+URLEncoder.encode("country","UTF-8")+"="+URLEncoder.encode(country1,"UTF-8")+"&"+URLEncoder.encode("token","UTF-8")+"="+URLEncoder.encode(token1,"UTF-8");
-                    bufferedWriter.write(post_data);
-                    bufferedWriter.flush();
-                    bufferedWriter.close();
-                    outputStream.close();
+                URL url=new URL(login_url);
+                HttpURLConnection httpsURLConnection=(HttpURLConnection) url.openConnection();
+                httpsURLConnection.setRequestMethod("POST");
+                httpsURLConnection.setDoOutput(true);
+                httpsURLConnection.setDoInput(true);
+                OutputStream outputStream=httpsURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_data= URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(id1,"UTF-8")+"&"+URLEncoder.encode("type","UTF-8")+"="+URLEncoder.encode(type1,"UTF-8")+"&"+URLEncoder.encode("fname","UTF-8")+"="+URLEncoder.encode(fname1,"UTF-8")+"&"+URLEncoder.encode("lname","UTF-8")+"="+URLEncoder.encode(lname1,"UTF-8")+"&"+URLEncoder.encode("dob","UTF-8")+"="+URLEncoder.encode(dob1,"UTF-8")+"&"+URLEncoder.encode("phone","UTF-8")+"="+URLEncoder.encode(phone1,"UTF-8")+"&"+URLEncoder.encode("orgn","UTF-8")+"="+URLEncoder.encode(orgn1,"UTF-8")+"&"+URLEncoder.encode("addr1","UTF-8")+"="+URLEncoder.encode(addr11,"UTF-8")+"&"+URLEncoder.encode("addr2","UTF-8")+"="+URLEncoder.encode(addr21,"UTF-8")+"&"+URLEncoder.encode("state","UTF-8")+"="+URLEncoder.encode(state1,"UTF-8")+"&"+URLEncoder.encode("city","UTF-8")+"="+URLEncoder.encode(city1,"UTF-8")+"&"+URLEncoder.encode("zipcode","UTF-8")+"="+URLEncoder.encode(zipcode1,"UTF-8")+"&"+URLEncoder.encode("country","UTF-8")+"="+URLEncoder.encode(country1,"UTF-8")+"&"+URLEncoder.encode("token","UTF-8")+"="+URLEncoder.encode(token1,"UTF-8");
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
 
-                    InputStream inputStream=httpsURLConnection.getInputStream();
-                    BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
+                InputStream inputStream=httpsURLConnection.getInputStream();
+                BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
 
-                    StringBuilder stringBuilder=new StringBuilder();
-                    while((JSON_STRING=bufferedReader.readLine())!=null)
-                    {
-                        stringBuilder.append(JSON_STRING+"\n");
-                    }
-                    bufferedReader.close();
-                    inputStream.close();
-                    httpsURLConnection.disconnect();
-
-                    synchronized (this)
-                    {
-                        //Initialize an integer (that will act as a counter) to zero
-                        int counter = 0;
-                        //While the counter is smaller than four
-                        while(counter <= 4)
-                        {
-                            //Wait 850 milliseconds
-                            this.wait(850);
-                            //Increment the counter
-                            counter++;
-                            //Set the current progress.
-                            //This value is going to be passed to the onProgressUpdate() method.
-                            publishProgress(counter*25);
-                        }
-                    }
-
-                    return stringBuilder.toString();
-
-                } catch (MalformedURLException e) {
-
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                StringBuilder stringBuilder=new StringBuilder();
+                while((JSON_STRING=bufferedReader.readLine())!=null)
+                {
+                    stringBuilder.append(JSON_STRING+"\n");
                 }
+                bufferedReader.close();
+                inputStream.close();
+                httpsURLConnection.disconnect();
+
+                synchronized (this)
+                {
+                    //Initialize an integer (that will act as a counter) to zero
+                    int counter = 0;
+                    //While the counter is smaller than four
+                    while(counter <= 4)
+                    {
+                        //Wait 850 milliseconds
+                        this.wait(850);
+                        //Increment the counter
+                        counter++;
+                        //Set the current progress.
+                        //This value is going to be passed to the onProgressUpdate() method.
+                        publishProgress(counter*25);
+                    }
+                }
+
+                return stringBuilder.toString();
+
+            } catch (MalformedURLException e) {
+
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             //}
             return null;
         }
@@ -297,7 +299,7 @@ email.setEnabled(false);
                 {
                     Toast.makeText(getActivity().getApplicationContext(),"Updated Successfully...",Toast.LENGTH_LONG).show();
 
-                    sessionManagement.LoginSession(id, type, emaila, fname.getText().toString(), lname.getText().toString(), phone.getText().toString(), dob.getText().toString(), addr1.getText().toString(), addr2.getText().toString(), city.getText().toString(), state.getText().toString(), country.getText().toString(), zipcode.getText().toString(), orgn.getText().toString(), token);
+                    sessionManagement.LoginSession(id, type, emaila, fname.getText().toString(), lname.getText().toString(), phone.getText().toString(), dob.getText().toString(), addr1.getText().toString(), addr2.getText().toString(), city.getText().toString(), state.getText().toString(), country.getText().toString(), zipcode.getText().toString(), orgn.getText().toString(), token,stripeid,addressid);
 
 
 
@@ -335,7 +337,7 @@ email.setEnabled(false);
 
 
 
-// onload data fetching
+    // onload data fetching
     class BackgroundWorkers extends AsyncTask<String,Integer,String> {
 
         String JSON_STRING;
@@ -350,64 +352,64 @@ email.setEnabled(false);
 
             //if(type.equals("login"))
             //{
-                try {
-                    String type = params[1].toString();
-                    String token = params[2].toString();
+            try {
+                String type = params[1].toString();
+                String token = params[2].toString();
 
-                    URL url=new URL(login_url);
-                    HttpURLConnection httpsURLConnection=(HttpURLConnection) url.openConnection();
-                    httpsURLConnection.setRequestMethod("POST");
-                    httpsURLConnection.setDoOutput(true);
-                    httpsURLConnection.setDoInput(true);
-                    OutputStream outputStream=httpsURLConnection.getOutputStream();
-                    BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data= URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(id,"UTF-8")+"&"+URLEncoder.encode("type","UTF-8")+"="+URLEncoder.encode(type,"UTF-8")+"&"+URLEncoder.encode("token","UTF-8")+"="+URLEncoder.encode(token,"UTF-8");
-                    bufferedWriter.write(post_data);
-                    bufferedWriter.flush();
-                    bufferedWriter.close();
-                    outputStream.close();
+                URL url=new URL(login_url);
+                HttpURLConnection httpsURLConnection=(HttpURLConnection) url.openConnection();
+                httpsURLConnection.setRequestMethod("POST");
+                httpsURLConnection.setDoOutput(true);
+                httpsURLConnection.setDoInput(true);
+                OutputStream outputStream=httpsURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_data= URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(id,"UTF-8")+"&"+URLEncoder.encode("type","UTF-8")+"="+URLEncoder.encode(type,"UTF-8")+"&"+URLEncoder.encode("token","UTF-8")+"="+URLEncoder.encode(token,"UTF-8");
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
 
-                    InputStream inputStream=httpsURLConnection.getInputStream();
-                    BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
+                InputStream inputStream=httpsURLConnection.getInputStream();
+                BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
 
-                    StringBuilder stringBuilder=new StringBuilder();
-                    while((JSON_STRING=bufferedReader.readLine())!=null)
-                    {
-                        stringBuilder.append(JSON_STRING+"\n");
-                    }
-                    bufferedReader.close();
-                    inputStream.close();
-                    httpsURLConnection.disconnect();
-
-                    synchronized (this)
-                    {
-                        //Initialize an integer (that will act as a counter) to zero
-                        int counter = 0;
-                        //While the counter is smaller than four
-                        while(counter <= 4)
-                        {
-                            //Wait 850 milliseconds
-                            this.wait(850);
-                            //Increment the counter
-                            counter++;
-                            //Set the current progress.
-                            //This value is going to be passed to the onProgressUpdate() method.
-                            publishProgress(counter*25);
-                        }
-                    }
-
-                    return stringBuilder.toString();
-
-
-
-                } catch (MalformedURLException e) {
-
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                StringBuilder stringBuilder=new StringBuilder();
+                while((JSON_STRING=bufferedReader.readLine())!=null)
+                {
+                    stringBuilder.append(JSON_STRING+"\n");
                 }
+                bufferedReader.close();
+                inputStream.close();
+                httpsURLConnection.disconnect();
+
+                synchronized (this)
+                {
+                    //Initialize an integer (that will act as a counter) to zero
+                    int counter = 0;
+                    //While the counter is smaller than four
+                    while(counter <= 4)
+                    {
+                        //Wait 850 milliseconds
+                        this.wait(850);
+                        //Increment the counter
+                        counter++;
+                        //Set the current progress.
+                        //This value is going to be passed to the onProgressUpdate() method.
+                        publishProgress(counter*25);
+                    }
+                }
+
+                return stringBuilder.toString();
+
+
+
+            } catch (MalformedURLException e) {
+
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             //}
             return null;
         }
@@ -447,7 +449,7 @@ email.setEnabled(false);
 
                 orgn.setText(company1);
             }
-  //          else if(check.equals("0"))
+            //          else if(check.equals("0"))
 //            {
 
             //}

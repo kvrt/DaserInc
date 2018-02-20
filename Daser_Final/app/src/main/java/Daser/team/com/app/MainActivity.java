@@ -15,11 +15,19 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.stripe.android.Stripe;
+import com.stripe.android.TokenCallback;
+import com.stripe.android.model.BankAccount;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,13 +43,16 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-EditText username,password,stype;
+    EditText username,password;
+    Spinner stype;
     TextView tx;
     Button btn;
     private ProgressDialog progressDialog;
-SessionManagement sessionManagement;
+    SessionManagement sessionManagement;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +60,25 @@ SessionManagement sessionManagement;
         setContentView(R.layout.activity_main);
         username=(EditText)findViewById(R.id.username);
         password=(EditText)findViewById(R.id.password);
-        stype=(EditText)findViewById(R.id.signert);
+        // stype=(EditText)findViewById(R.id.signert);
 
+        stype = (Spinner) findViewById(R.id.signert);
+        ArrayAdapter<String> adapter;
+        List<String> list;
+
+        list = new ArrayList<String>();
+        list.add("Buyer");
+        list.add("Seller");
+
+        adapter = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_spinner_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        stype.setAdapter(adapter);
+        // //dNH8jE8ZF7c:APA91bFk-V3MEoKkDNC79_NG6nL0DPfmzeGoSjEj1IdDmFdFHrwrCc7zIJKIaCxZZZZXbiySw8CDf_uBmOt-c9rVAtTESUp2Xa5NMsjxr7etRaQOf6Bchds-6ZK23KKuH67DtcEu71mD
+        // //dNH8jE8ZF7c:APA91bFk-V3MEoKkDNC79_NG6nL0DPfmzeGoSjEj1IdDmFdFHrwrCc7zIJKIaCxZZZZXbiySw8CDf_uBmOt-c9rVAtTESUp2Xa5NMsjxr7etRaQOf6Bchds-6ZK23KKuH67DtcEu71mD
         // Session Manager
 
-      //  FirebaseInstanceIdService tok=new FirebaseInstanceIdService();
+        //  FirebaseInstanceIdService tok=new FirebaseInstanceIdService();
 
         //tok.onTokenRefresh();
         //username.setText(tok.onTokenRefresh());
@@ -77,6 +102,30 @@ SessionManagement sessionManagement;
     }
     public void notifications(View view)
     {
+/*
+        Stripe stripe = new Stripe(this);
+
+        stripe.setDefaultPublishableKey("pk_test_eu5vgSNxVXBVTWNqHxQNKVls");
+        BankAccount bankAccount = new BankAccount("individual","usd","Emma Moore","US","110000000","000123456789","hg","");
+        stripe.createBankAccountToken(bankAccount, new TokenCallback() {
+            @Override
+            public void onError(Exception error) {
+                Log.e("Stripe Error", error.getMessage());
+
+                Toast.makeText(getApplicationContext(),"Unable to create bank token, error is : "+error.getMessage(),Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onSuccess(com.stripe.android.model.Token token) {
+                Log.e("Bank Token", token.getId());
+tx.setText(token.getId().toString());
+               // acno.setText(token.getId().toString());
+               // new seller_bank_add.BackgroundWorkers().execute(uid_dy.toString(),token.getId().toString());
+
+            }
+        });
+
+        /*
         int notificationId = 1;
         String title="Notififcation Title";
         String ntxt="Notififcation body, for testing purpose i only put dummy data. Notififcation body, for testing purpose i only put dummy data. Notififcation body, for testing purpose i only put dummy data. ";
@@ -111,7 +160,7 @@ SessionManagement sessionManagement;
 
         NotificationManager notificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(notificationId,builder.build());
-
+*/
 
     }
 
@@ -119,26 +168,38 @@ SessionManagement sessionManagement;
     public void forgotpassword(View view)
     {
 
+//        MessageReceiver receiver=new MessageReceiver(new Message());
+
+        //Intent intent=new Intent(this,Seller_bgm_Services.class);
+        //startService(intent);
+
+        // String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        //  Toast.makeText(this,"token : "+refreshedToken,Toast.LENGTH_LONG).show();
+
         Intent intent=new Intent(getApplicationContext(),forgot_password.class);
         startActivity(intent);
-        
+
     }
-public class Message
-{
-    public void displayMessage(int resultCode, Bundle resultData)
+    /*public class Message
     {
-            String message=resultData.getString("message");
-            Toast.makeText(MainActivity.this, resultCode+" "+message,Toast.LENGTH_LONG).show();
-    }
-}
+        public void displayMessage(int resultCode, Bundle resultData)
+        {
+                String message=resultData.getString("message");
+                Toast.makeText(MainActivity.this, resultCode+" "+message,Toast.LENGTH_LONG).show();
+        }
+    }*/
     public void seeker_signup(View view)
     {
 
+/*
+        Intent intent=new Intent(this,Seller_bgm_Services.class);
+        stopService(intent);
+        */
 
-     
+
         Intent intent=new Intent(getApplicationContext(),Service_seeker_signup.class);
         startActivity(intent);
-        
+
     }
 
     public void provider_signup(View view)
@@ -152,28 +213,28 @@ public class Message
     {
         String uname=username.getText().toString();
         String pass=password.getText().toString();
-        String ltype=stype.getText().toString();
+        String ltype=stype.getSelectedItem().toString();
 
         String type="login";
-    if(uname.isEmpty() || uname.length()< 6) {
-    Toast.makeText(getApplicationContext(),"Username should not be empty and min 6 characters",Toast.LENGTH_LONG).show();
-    }
-    else
-    {
-        if(pass.isEmpty())
-        {
-            Toast.makeText(getApplicationContext(),"Password should not be empty",Toast.LENGTH_LONG).show();
-        }
-        else if(ltype.isEmpty())
-        {
-            Toast.makeText(getApplicationContext(),"Signer type should not be empty",Toast.LENGTH_LONG).show();
+        if(uname.isEmpty() || uname.length()< 6) {
+            Toast.makeText(getApplicationContext(),"Username should not be empty and min 6 characters",Toast.LENGTH_LONG).show();
         }
         else
         {
-            new BackgroundWorkers().execute(type,uname,pass,ltype);
+            if(pass.isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Password should not be empty",Toast.LENGTH_LONG).show();
+            }
+            else if(ltype.isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Signer type should not be empty",Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                new BackgroundWorkers().execute(type,uname,pass,ltype);
 
+            }
         }
-    }
 //        new BackgroundWorkers().execute(type,uname,pass);
 
         //insertdata();
@@ -186,8 +247,8 @@ public class Message
         Context context;
         AlertDialog alertDialog;
 //        BackgroundWorker(Context ctx)
-       // {
-         //   context = ctx;
+        // {
+        //   context = ctx;
         //}
 /*
         public BackgroundWorker(Context ctx) {
@@ -198,7 +259,7 @@ public class Message
         protected String doInBackground(String... params) {
             String type=params[0];
             //String login_url="http://10.0.2.2:2426/Androidservices/insert";
-           // String login_url="http://noticeperiod.com/Androidservices/insert";
+            // String login_url="http://noticeperiod.com/Androidservices/insert";
             String login_url="http://10.0.2.2:4001/customer/signin";
 
 
@@ -327,7 +388,7 @@ public class Message
             Intent intent=new Intent(getApplicationContext(),Logon.class);
             startActivity(intent);*/
 
-         //   tx.setText(result);
+            //   tx.setText(result);
 
 
             JSONObject jsonObject = null;
@@ -347,54 +408,56 @@ public class Message
             else
             {
 
-            //tx.setText(result);
+                //tx.setText(result);
 
 
-            try {
-                jsonObject = new JSONObject(result);
+                try {
+                    jsonObject = new JSONObject(result);
 
-                String ii = jsonObject.getString("code");
+                    String ii = jsonObject.getString("code");
 
-                //Integer ii=jsonObject.getInt("code");
-
-
-                if (ii.equals("1")) {
-                    String unames = jsonObject.getString("first_name");
-                    String unames1 =jsonObject.getString("last_name");
-                    String ids = jsonObject.getString("id");
-                    String phonenumbers = jsonObject.getString("phonenumber");
-                    String signertype = jsonObject.getString("type");
-                    String emailsa = jsonObject.getString("emailaddress");
-                    String dob = jsonObject.getString("dob");
-                    String address1 = jsonObject.getString("address1");
-                    String address2 = jsonObject.getString("address2");
-                    String city = jsonObject.getString("city");
-                    String state = jsonObject.getString("state");
-                    String country = jsonObject.getString("country");
-                    String zip = jsonObject.getString("zip");
-                    String organization = jsonObject.getString("orgn");
+                    //Integer ii=jsonObject.getInt("code");
 
 
-                    String token = jsonObject.getString("token");
+                    if (ii.equals("1")) {
+                        String unames = jsonObject.getString("first_name");
+                        String unames1 =jsonObject.getString("last_name");
+                        String ids = jsonObject.getString("id");
+                        String phonenumbers = jsonObject.getString("phonenumber");
+                        String signertype = jsonObject.getString("type");
+                        String emailsa = jsonObject.getString("emailaddress");
+                        String dob = jsonObject.getString("dob");
+                        String address1 = jsonObject.getString("address1");
+                        String address2 = jsonObject.getString("address2");
+                        String city = jsonObject.getString("city");
+                        String state = jsonObject.getString("state");
+                        String country = jsonObject.getString("country");
+                        String zip = jsonObject.getString("zip");
+                        String organization = jsonObject.getString("orgn");
+                        String stripeid = jsonObject.getString("stripeid");
+                        String addrid = jsonObject.getString("addressid");
 
 
-                    sessionManagement.LoginSession(ids, signertype, emailsa, unames,unames1, phonenumbers,dob,address1,address2,city,state,country,zip,organization,token);
+                        String token = jsonObject.getString("token");
 
-                    Toast.makeText(getApplicationContext(), "Successfully Logged In...", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(), Logon.class);
-                    startActivity(intent);
 
-                } else if (ii.equals("0")) {
-                    Toast.makeText(getApplicationContext(), "Invalid credentials. Please try again...", Toast.LENGTH_LONG).show();
-                    editText.setText("");
-                    editText2.setText("");
+                        sessionManagement.LoginSession(ids, signertype, emailsa, unames,unames1, phonenumbers,dob,address1,address2,city,state,country,zip,organization,token,stripeid,addrid);
 
+                        Toast.makeText(getApplicationContext(), "Successfully Logged In...", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), Logon.class);
+                        startActivity(intent);
+
+                    } else if (ii.equals("0")) {
+                        Toast.makeText(getApplicationContext(), "Invalid credentials. Please try again...", Toast.LENGTH_LONG).show();
+                        editText.setText("");
+                        editText2.setText("");
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
 
-        }
+            }
 
 
         }

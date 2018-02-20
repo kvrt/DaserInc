@@ -11,10 +11,10 @@ import android.os.ResultReceiver;
 @SuppressLint("ParcelCreator")
 public class MessageReceiver extends ResultReceiver {
 
-    private MainActivity.Message message;
+    private MainActivity message;
 
 
-    public MessageReceiver(MainActivity.Message message)
+    public MessageReceiver(MainActivity message)
     {
         super(new Handler());
         this.message=message;
@@ -22,8 +22,9 @@ public class MessageReceiver extends ResultReceiver {
 
     @Override
     protected void onReceiveResult(int resultCode, Bundle resultData) {
-        message.displayMessage(resultCode, resultData);
+//        message.displayMessage(resultCode, resultData);
 
     }
+
 
 }

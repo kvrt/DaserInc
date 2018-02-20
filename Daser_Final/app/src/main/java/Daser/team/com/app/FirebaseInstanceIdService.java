@@ -20,7 +20,7 @@ public class FirebaseInstanceIdService extends com.google.firebase.iid.FirebaseI
 
         //Displaying token in logcat
         Log.e(TAG, "Refreshed token: " + refreshedToken);
-        //Toast.makeText(this,"Firebase token is : "+refreshedToken,Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,"Firebase token is : "+refreshedToken,Toast.LENGTH_LONG).show(); dNH8jE8ZF7c:APA91bFk-V3MEoKkDNC79_NG6nL0DPfmzeGoSjEj1IdDmFdFHrwrCc7zIJKIaCxZZZZXbiySw8CDf_uBmOt-c9rVAtTESUp2Xa5NMsjxr7etRaQOf6Bchds-6ZK23KKuH67DtcEu71mD
 
     }
 

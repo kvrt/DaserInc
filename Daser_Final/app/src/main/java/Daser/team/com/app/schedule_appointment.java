@@ -67,20 +67,21 @@ public class schedule_appointment extends Fragment implements AdapterView.OnItem
     SessionManagement sessionManagement;
     Activity act=getActivity();
     TextView textView,calc,calc1,tx,exist_addr,cdetails,cdetails1,updatecrd,keepcrd;
-    EditText ctkn,crdstatus,dynamic_text,dynamic_text1,dynamic_text2,dynamic_text3,count,dd,tt,cnt,param,addr1, addr2, state, city, zip, country,vl,cardn,em,ey,cvc,tn2,tn3,tn4;
+    EditText srvids,ctkn,crdstatus,dynamic_text,dynamic_text1,dynamic_text2,dynamic_text3,count,dd,tt,cnt,param,addr1, addr2, state, city, zip, country,vl,cardn,em,ey,cvc,tn2,tn3,tn4;
     android.support.design.widget.TextInputLayout fl1,fl2;
     float seramt,seramt1=0;
     double seramt3=0;
+    String serids="",ssid="";
     List<EditText> allEds;
     List<EditText> allEds_amt;
     List<EditText> allEds_tags;
     List<EditText> allEds_ids;
-
+    List<EditText> serviceids;
     List<android.support.design.widget.TextInputLayout> flabels;
 
 
-    LinearLayout dyna,adcard,excard;
-    String url,getdata,id,type,param_value,param_amt,token,param_id,cardtoken,cardid,digits,crdtype;
+    LinearLayout dyna,adcard,excard,dyna_serviceid;
+    String url,getdata,id,type,param_value,param_amt,token,param_id,cardtoken,cardid,digits,crdtype,stripeid,addressid;
     Button sbt,qt;
 
     @Nullable
@@ -103,8 +104,8 @@ public class schedule_appointment extends Fragment implements AdapterView.OnItem
         keepcrd=(TextView)v.findViewById(R.id.existngcard);
 
         //   new schedule_appointment.BackgroundWorkers().execute();
-         adcard=(LinearLayout)v.findViewById(R.id.cardinfo);
-         excard=(LinearLayout)v.findViewById(R.id.existcardinfo);
+        adcard=(LinearLayout)v.findViewById(R.id.cardinfo);
+        excard=(LinearLayout)v.findViewById(R.id.existcardinfo);
 
 
         tx = (TextView)v.findViewById(R.id.text1);
@@ -112,6 +113,7 @@ public class schedule_appointment extends Fragment implements AdapterView.OnItem
         tn2 = (EditText)v.findViewById(R.id.tkn2);
         tn3 = (EditText)v.findViewById(R.id.tkn3);
         tn4 = (EditText)v.findViewById(R.id.tkn4);
+        // srvids = (EditText)v.findViewById(R.id.serviceid);
 
 
 
@@ -135,6 +137,8 @@ public class schedule_appointment extends Fragment implements AdapterView.OnItem
 
 
         dyna=(LinearLayout)v.findViewById(R.id.dynamic);
+        dyna_serviceid=(LinearLayout)v.findViewById(R.id.dynamic_serviceid);
+
 /*        int i=1;
         for(i=1;i<=5;i++)
         {
@@ -148,7 +152,7 @@ public class schedule_appointment extends Fragment implements AdapterView.OnItem
         count.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         count.setHint("Total count");
         count.setId(100+1);
-        
+
         count.setText(""+i);
         dyna.addView(count);
 
@@ -169,6 +173,8 @@ Dynamic adding data
         id = user.get(SessionManagement.KEY_id);
         type = user.get(SessionManagement.KEY_type);
         token = user.get(SessionManagement.KEY_token);
+        stripeid = user.get(SessionManagement.KEY_stripeid);
+        addressid = user.get(SessionManagement.KEY_addrid);
 
 
 
@@ -316,7 +322,7 @@ Dynamic adding data
 
                 double fres = Math.round(((seramt1/60)*25)*100.0)/100.0;
                 double fhr = Math.round((seramt1/60)*100.0)/100.0;
-seramt3=fres;
+                seramt3=fres;
 
 //                calc.setText(Html.fromHtml("<b>Cost per Hr / $25</b><br/><h5><b'>"+res.substring(4)+"<h2>Total Mins : <u>"+seramt1+"</u></h2><br/><h2>Total Hours : <u> "+fhr+"</u></h2><br/><h2>Sub Total : <u> $ "+fres+"</u></h2></b></h5>"));
                 calc.setText(Html.fromHtml("<h5><b><h2>Sub Total : <u> $ "+fres+"</u></h2></b></h5>"));
@@ -340,7 +346,7 @@ seramt3=fres;
 
                     adcard.setVisibility(View.GONE);
                     excard.setVisibility(View.VISIBLE);
-                   int len=tn3.getText().toString().length();
+                    int len=tn3.getText().toString().length();
                     if(len==1)
                     {
                         cdetails.setText(Html.fromHtml("<b>Card Number : </b>000"+tn3.getText().toString()) );
@@ -558,7 +564,7 @@ seramt3=fres;
 
                                 Card card = new Card(cardn.getText().toString(), Integer.parseInt(em.getText().toString()), Integer.parseInt(ey.getText().toString()), cvc.getText().toString());
                                 //String wa=card.getCustomerId();
-                               // tt.setText(wa);
+                                // tt.setText(wa);
 // Remember to validate the card object before you use it to save time.
                                 if (!card.validateCard()) {
                                     // Do not continue token creation.
@@ -574,9 +580,9 @@ seramt3=fres;
                                             new TokenCallback() {
                                                 public void onSuccess(Token token) {
                                                     // Send token to your server
-                                                   // Toast.makeText(getContext(),token.getId(),Toast.LENGTH_LONG).show();
+                                                    // Toast.makeText(getContext(),token.getId(),Toast.LENGTH_LONG).show();
                                                     ctkn.setText(token.getId());
-                                                   //new Backgroundservicerequest().execute(id,type,dd.getText().toString(),tt.getText().toString(), String.valueOf(seramt3),addr1.getText().toString(),addr2.getText().toString(),city.getText().toString(),state.getText().toString(),country.getText().toString(),zip.getText().toString(),spinnerFood.getSelectedItem().toString(),cnt.getText().toString(),param_value.substring(4),param_amt.substring(4),token,param_id.substring(4));
+                                                    //new Backgroundservicerequest().execute(id,type,dd.getText().toString(),tt.getText().toString(), String.valueOf(seramt3),addr1.getText().toString(),addr2.getText().toString(),city.getText().toString(),state.getText().toString(),country.getText().toString(),zip.getText().toString(),spinnerFood.getSelectedItem().toString(),cnt.getText().toString(),param_value.substring(4),param_amt.substring(4),token,param_id.substring(4));
 
                                                 }
                                                 public void onError(Exception error) {
@@ -587,7 +593,7 @@ seramt3=fres;
                                     );
                                     //Toast.makeText(getContext(),ctkn.getText().toString(),Toast.LENGTH_LONG).show();
 
-                                    new Backgroundservicerequest().execute(id,type,dd.getText().toString(),tt.getText().toString(), String.valueOf(seramt3),addr1.getText().toString(),addr2.getText().toString(),city.getText().toString(),state.getText().toString(),country.getText().toString(),zip.getText().toString(),spinnerFood.getSelectedItem().toString(),cnt.getText().toString(),param_value.substring(4),param_amt.substring(4),token,param_id.substring(4),ctkn.getText().toString(),tn2.getText().toString(),crdstatus.getText().toString());
+                                    new Backgroundservicerequest().execute(id,type,dd.getText().toString(),tt.getText().toString(), String.valueOf(seramt3),addr1.getText().toString(),addr2.getText().toString(),city.getText().toString(),state.getText().toString(),country.getText().toString(),zip.getText().toString(),spinnerFood.getSelectedItem().toString(),cnt.getText().toString(),param_value.substring(4),param_amt.substring(4),token,param_id.substring(4),ctkn.getText().toString(),tn2.getText().toString(),crdstatus.getText().toString(),stripeid.toString(),addressid.toString());
 
                                 }
 
@@ -597,7 +603,7 @@ seramt3=fres;
                         }
                         else
                         {
-                            new Backgroundservicerequest().execute(id,type,dd.getText().toString(),tt.getText().toString(), String.valueOf(seramt3),addr1.getText().toString(),addr2.getText().toString(),city.getText().toString(),state.getText().toString(),country.getText().toString(),zip.getText().toString(),spinnerFood.getSelectedItem().toString(),cnt.getText().toString(),param_value.substring(4),param_amt.substring(4),token,param_id.substring(4),ctkn.getText().toString(),tn2.getText().toString(),crdstatus.getText().toString());
+                            new Backgroundservicerequest().execute(id,type,dd.getText().toString(),tt.getText().toString(), String.valueOf(seramt3),addr1.getText().toString(),addr2.getText().toString(),city.getText().toString(),state.getText().toString(),country.getText().toString(),zip.getText().toString(),spinnerFood.getSelectedItem().toString(),cnt.getText().toString(),param_value.substring(4),param_amt.substring(4),token,param_id.substring(4),ctkn.getText().toString(),tn2.getText().toString(),crdstatus.getText().toString(),stripeid.toString(),addressid.toString());
 
                         }
 
@@ -674,7 +680,7 @@ seramt3=fres;
                                             new TokenCallback() {
                                                 public void onSuccess(Token token) {
                                                     // Send token to your server
-                                                   // Toast.makeText(getContext(),token.getId(),Toast.LENGTH_LONG).show();
+                                                    // Toast.makeText(getContext(),token.getId(),Toast.LENGTH_LONG).show();
                                                     ctkn.setText(token.getId());
                                                     //new Backgroundservicerequest().execute(id,type,dd.getText().toString(),tt.getText().toString(), String.valueOf(seramt3),addr1.getText().toString(),addr2.getText().toString(),city.getText().toString(),state.getText().toString(),country.getText().toString(),zip.getText().toString(),spinnerFood.getSelectedItem().toString(),cnt.getText().toString(),param_value.substring(4),param_amt.substring(4),token,param_id.substring(4));
 
@@ -687,7 +693,7 @@ seramt3=fres;
                                     );
                                     //Toast.makeText(getContext(),ctkn.getText().toString(),Toast.LENGTH_LONG).show();
 
-                                    new Backgroundservicerequest().execute(id,type,dd.getText().toString(),tt.getText().toString(), String.valueOf(seramt3),addr1.getText().toString(),addr2.getText().toString(),city.getText().toString(),state.getText().toString(),country.getText().toString(),zip.getText().toString(),spinnerFood.getSelectedItem().toString(),cnt.getText().toString(),param_value.substring(4),param_amt.substring(4),token,param_id.substring(4),ctkn.getText().toString(),tn2.getText().toString(),crdstatus.getText().toString());
+                                    new Backgroundservicerequest().execute(id,type,dd.getText().toString(),tt.getText().toString(), String.valueOf(seramt3),addr1.getText().toString(),addr2.getText().toString(),city.getText().toString(),state.getText().toString(),country.getText().toString(),zip.getText().toString(),spinnerFood.getSelectedItem().toString(),cnt.getText().toString(),param_value.substring(4),param_amt.substring(4),token,param_id.substring(4),ctkn.getText().toString(),tn2.getText().toString(),crdstatus.getText().toString(),stripeid.toString(),addressid.toString());
 
                                 }
 
@@ -697,7 +703,7 @@ seramt3=fres;
                         }
                         else
                         {
-                            new Backgroundservicerequest().execute(id,type,dd.getText().toString(),tt.getText().toString(), String.valueOf(seramt3),addr1.getText().toString(),addr2.getText().toString(),city.getText().toString(),state.getText().toString(),country.getText().toString(),zip.getText().toString(),spinnerFood.getSelectedItem().toString(),cnt.getText().toString(),param_value.substring(4),param_amt.substring(4),token,param_id.substring(4),ctkn.getText().toString(),tn2.getText().toString(),crdstatus.getText().toString());
+                            new Backgroundservicerequest().execute(id,type,dd.getText().toString(),tt.getText().toString(), String.valueOf(seramt3),addr1.getText().toString(),addr2.getText().toString(),city.getText().toString(),state.getText().toString(),country.getText().toString(),zip.getText().toString(),spinnerFood.getSelectedItem().toString(),cnt.getText().toString(),param_value.substring(4),param_amt.substring(4),token,param_id.substring(4),ctkn.getText().toString(),tn2.getText().toString(),crdstatus.getText().toString(),stripeid.toString(),addressid.toString());
 
                         }
 
@@ -734,8 +740,11 @@ seramt3=fres;
         // On selecting a spinner item
         String item = parent.getItemAtPosition(position).toString();
 
+
+        // res4= serviceids.get(id).getText().toString();
+
+        // srvids.setText(categoriesList.get(2).getId());
         // Showing selected spinner item
-        //    Toast.makeText(parent.getContext(), "Selected: " + item+" "+position+" "+id, Toast.LENGTH_LONG).show();
         //Category country = (Category) parent.getSelectedItem();
 
         //Toast.makeText(parent.getContext(),parent.getItemAtPosition(position).toString() +" Selected" ,Toast.LENGTH_LONG).show();
@@ -749,8 +758,9 @@ seramt3=fres;
             calc.setVisibility(View.GONE);
             qt.setVisibility(View.GONE);
 
-
-            new getsubservices().execute(parent.getItemAtPosition(position).toString(),token);
+            //  Toast.makeText(parent.getContext(), serviceids.get((int) (id-1)).getText().toString()+" Selected: " + item+" "+position+" "+id, Toast.LENGTH_LONG).show();
+            ssid=serviceids.get((int) (id-1)).getText().toString();
+            new getsubservices().execute(ssid,token);
         }
     }
     public void onNothingSelected(AdapterView<?> arg0) {
@@ -771,6 +781,7 @@ seramt3=fres;
             tn2.setText(categoriesList.get(i).getTkndata2());
             tn3.setText(categoriesList.get(i).getTkndata3());
             tn4.setText(categoriesList.get(i).getTkndata4());
+            // srvids.setText(categoriesList.get(i).getId());
 
 
 
@@ -823,9 +834,20 @@ seramt3=fres;
 
             Log.e("Response: ", "> " + json);
 
-            if (json != null) {
+
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            //  super.onPostExecute(result);
+
+            //  dyna_serviceid.addView(srvids);
+
+
+            if (result != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(json);
+                    JSONObject jsonObj = new JSONObject(result);
                     if (jsonObj != null) {
 
 
@@ -838,17 +860,50 @@ seramt3=fres;
                         }
 */
 
-
-                        JSONArray categories = jsonObj.getJSONArray("services");
+                        serviceids = new ArrayList<EditText>();
+                        JSONArray categories = jsonObj.getJSONArray("data");
 
                         for (int i = 0; i < categories.length(); i++) {
                             JSONObject catObj = (JSONObject) categories.get(i);
-                            //exist_addr.setText(Html.fromHtml(catObj.getString("addr1")+", "+catObj.getString("addr2")+", <br/>"+catObj.getString("city")+", "+catObj.getString("state")+", <br/>"+catObj.getString("country")+", "+catObj.getString("zip")));
-                            String adr=catObj.getString("addr1")+", "+catObj.getString("addr2")+", "+catObj.getString("city")+", "+catObj.getString("state")+", "+catObj.getString("country")+", "+catObj.getString("zip");
-                            Category cat = new Category(catObj.getInt("id"),
-                                    catObj.getString("name"),adr,catObj.getString("cstatus"),catObj.getString("ldigits"),catObj.getString("ctype"));
-                            categoriesList.add(cat);
+
+
+
+                            String ii = catObj.getString("code");
+
+                            if (ii.equals("404")) {
+                                Toast.makeText(getActivity(), "Session is expired...", Toast.LENGTH_LONG).show();
+                                sessionManagement.logout();
+
+                            }
+                            else {
+
+                                // serids+=serids+catObj.getInt("id")+"^";
+
+                                //  tx.setText("asdas");
+                                srvids=new EditText(getActivity());
+
+                                srvids.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                                srvids.setHint(catObj.getString("id"));
+                                srvids.setText(catObj.getString("id"));
+                                srvids.setVisibility(View.GONE);
+                                srvids.setId(i+511);
+                                serviceids.add(srvids);
+                                dyna_serviceid.addView(srvids);
+                                // dyna.addView(srvids);
+
+
+                                //exist_addr.setText(Html.fromHtml(catObj.getString("addr1")+", "+catObj.getString("addr2")+", <br/>"+catObj.getString("city")+", "+catObj.getString("state")+", <br/>"+catObj.getString("country")+", "+catObj.getString("zip")));
+                                String adr = catObj.getString("addr1") + ", " + catObj.getString("addr2") + ", " + catObj.getString("city") + ", " + catObj.getString("state") + ", " + catObj.getString("country") + ", " + catObj.getString("zip");
+                                Category cat = new Category(catObj.getInt("id"),
+                                        catObj.getString("name"), adr, catObj.getString("cstatus"), catObj.getString("ldigits"), catObj.getString("ctype"));
+                                categoriesList.add(cat);
+
+
+
+
+                            }
                         }
+
 
                     }
 
@@ -862,13 +917,7 @@ seramt3=fres;
                 Log.e("JSON Data", "Didn't receive any data from server!");
             }
 
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
+            // tx.setText(serids);
             populateSpinner();
         }
 
@@ -944,8 +993,8 @@ seramt3=fres;
                     for (int i = 0; i < categories.length(); i++) {
                         j++;
                         JSONObject catObj = (JSONObject) categories.get(i);
-                       //  fl1=new android.support.design.widget.TextInputLayout(getActivity());
-                       // fl1.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        //  fl1=new android.support.design.widget.TextInputLayout(getActivity());
+                        // fl1.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                         dynamic_text=new EditText(getActivity());
                         allEds.add(dynamic_text);
                         dynamic_text.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -1060,6 +1109,8 @@ seramt3=fres;
                 String cardid = params[18].toString();
 
                 String statuscard = params[19].toString();
+                String stripei = params[20].toString();
+                String addressi = params[21].toString();
 
                 //dd.setText(cardtoken);
                 /*
@@ -1085,7 +1136,7 @@ seramt3=fres;
                 httpsURLConnection.setDoInput(true);
                 OutputStream outputStream = httpsURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(s_id, "UTF-8") + "&" +URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(s_type, "UTF-8")+ "&" +URLEncoder.encode("date", "UTF-8") + "=" + URLEncoder.encode(s_date, "UTF-8")+ "&" +URLEncoder.encode("time", "UTF-8") + "=" + URLEncoder.encode(s_time, "UTF-8")+ "&" +URLEncoder.encode("amount", "UTF-8") + "=" + URLEncoder.encode(s_amount, "UTF-8")+ "&" + URLEncoder.encode("addr1", "UTF-8") + "=" + URLEncoder.encode(s_addr1, "UTF-8")+ "&" + URLEncoder.encode("addr2", "UTF-8") + "=" + URLEncoder.encode(s_addr2, "UTF-8")+ "&" + URLEncoder.encode("city", "UTF-8") + "=" + URLEncoder.encode(s_city, "UTF-8")+ "&" + URLEncoder.encode("state", "UTF-8") + "=" + URLEncoder.encode(s_state, "UTF-8")+ "&" + URLEncoder.encode("zip", "UTF-8") + "=" + URLEncoder.encode(s_zip, "UTF-8")+ "&" + URLEncoder.encode("country", "UTF-8") + "=" + URLEncoder.encode(s_country, "UTF-8")+ "&" + URLEncoder.encode("service", "UTF-8") + "=" + URLEncoder.encode(service, "UTF-8")+ "&" + URLEncoder.encode("max", "UTF-8") + "=" + URLEncoder.encode(pmax, "UTF-8")+ "&" + URLEncoder.encode("paramv", "UTF-8") + "=" + URLEncoder.encode(pvalue, "UTF-8")+ "&" + URLEncoder.encode("parama", "UTF-8") + "=" + URLEncoder.encode(pamt, "UTF-8") + "&" + URLEncoder.encode("token","UTF-8") + "=" + URLEncoder.encode(tokens,"UTF-8") + "&" + URLEncoder.encode("prmid","UTF-8") + "=" + URLEncoder.encode(prmid,"UTF-8") + "&" + URLEncoder.encode("cardtoken","UTF-8") + "=" + URLEncoder.encode(ctkn.getText().toString(),"UTF-8") + "&" + URLEncoder.encode("cardid","UTF-8") + "=" + URLEncoder.encode(tn2.getText().toString(),"UTF-8") + "&" + URLEncoder.encode("statuscard","UTF-8") + "=" + URLEncoder.encode(statuscard,"UTF-8");
+                String post_data = URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(s_id, "UTF-8") + "&" +URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(s_type, "UTF-8")+ "&" +URLEncoder.encode("date", "UTF-8") + "=" + URLEncoder.encode(s_date, "UTF-8")+ "&" +URLEncoder.encode("time", "UTF-8") + "=" + URLEncoder.encode(s_time, "UTF-8")+ "&" +URLEncoder.encode("amount", "UTF-8") + "=" + URLEncoder.encode(s_amount, "UTF-8")+ "&" + URLEncoder.encode("addr1", "UTF-8") + "=" + URLEncoder.encode(s_addr1, "UTF-8")+ "&" + URLEncoder.encode("addr2", "UTF-8") + "=" + URLEncoder.encode(s_addr2, "UTF-8")+ "&" + URLEncoder.encode("city", "UTF-8") + "=" + URLEncoder.encode(s_city, "UTF-8")+ "&" + URLEncoder.encode("state", "UTF-8") + "=" + URLEncoder.encode(s_state, "UTF-8")+ "&" + URLEncoder.encode("zip", "UTF-8") + "=" + URLEncoder.encode(s_zip, "UTF-8")+ "&" + URLEncoder.encode("country", "UTF-8") + "=" + URLEncoder.encode(s_country, "UTF-8")+ "&" + URLEncoder.encode("service", "UTF-8") + "=" + URLEncoder.encode(ssid, "UTF-8")+ "&" + URLEncoder.encode("max", "UTF-8") + "=" + URLEncoder.encode(pmax, "UTF-8")+ "&" + URLEncoder.encode("paramv", "UTF-8") + "=" + URLEncoder.encode(pvalue, "UTF-8")+ "&" + URLEncoder.encode("parama", "UTF-8") + "=" + URLEncoder.encode(pamt, "UTF-8") + "&" + URLEncoder.encode("token","UTF-8") + "=" + URLEncoder.encode(tokens,"UTF-8") + "&" + URLEncoder.encode("prmid","UTF-8") + "=" + URLEncoder.encode(prmid,"UTF-8") + "&" + URLEncoder.encode("cardtoken","UTF-8") + "=" + URLEncoder.encode(ctkn.getText().toString(),"UTF-8") + "&" + URLEncoder.encode("cardid","UTF-8") + "=" + URLEncoder.encode(tn2.getText().toString(),"UTF-8") + "&" + URLEncoder.encode("statuscard","UTF-8") + "=" + URLEncoder.encode(statuscard,"UTF-8") + "&" + URLEncoder.encode("stripeidcus","UTF-8") + "=" + URLEncoder.encode(stripei,"UTF-8") + "&" + URLEncoder.encode("adrid","UTF-8") + "=" + URLEncoder.encode(addressi,"UTF-8");
                 //tt.setText(post_data);
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();

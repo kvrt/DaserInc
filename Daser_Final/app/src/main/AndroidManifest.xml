@@ -5,30 +5,30 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="Daser.team.com.app.Globalvariables_set"
+        android:name=".Globalvariables_set"
         android:allowBackup="true"
         android:icon="@mipmap/final_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/final_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="Daser.team.com.app.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="Daser.team.com.app.forgot_password" />
-        <activity android:name="Daser.team.com.app.Service_seeker_signup" />
-        <activity android:name="Daser.team.com.app.Service_provider_signup" />
+        <activity android:name=".forgot_password" />
+        <activity android:name=".Service_seeker_signup" />
+        <activity android:name=".Service_provider_signup" />
         <activity
-            android:name="Daser.team.com.app.Logon"
+            android:name=".Logon"
             android:label="@string/title_activity_logon"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="Daser.team.com.app.Emailconfirmation" />
+        <activity android:name=".Emailconfirmation" />
 
-        <receiver android:name="Daser.team.com.app.NotificationActionReceiver">
+        <receiver android:name=".NotificationActionReceiver">
             <intent-filter>
                 <action android:name="CONFIRM" />
                 <action android:name="CANCEL" />
@@ -36,25 +36,21 @@
         </receiver>
 
         <service
-            android:name="Daser.team.com.app.Seller_bgm_Services"
+            android:name=".Seller_bgm_Services"
             android:enabled="true"
-            android:exported="false"></service>
-
-
-
-
-        <service android:name="Daser.team.com.app.FirebaseMessagingService">
+            android:exported="false" />
+        <service android:name=".FirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <service android:name="Daser.team.com.app.FirebaseInstanceIdService">
+        <service android:name=".FirebaseInstanceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
+        <activity android:name=".seller_bank_add"></activity>
     </application>
 
 </manifest>

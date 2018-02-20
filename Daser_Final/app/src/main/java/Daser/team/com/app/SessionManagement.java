@@ -35,6 +35,8 @@ public class SessionManagement {
     public static final String KEY_country = "country";
     public static final String KEY_zip = "zip";
     public static final String KEY_org = "org";
+    public static final String KEY_stripeid = "stripeid";
+    public static final String KEY_addrid = "addrid";
 
 
     public static final String KEY_token = "token";
@@ -47,12 +49,12 @@ public class SessionManagement {
 
 
 
-    public void LoginSession(String id,String type,String email,String name,String name1,String phone,String dob,String addr1,String addr2,String city,String state,String country,String zip,String orgname,String token)
+    public void LoginSession(String id,String type,String email,String name,String name1,String phone,String dob,String addr1,String addr2,String city,String state,String country,String zip,String orgname,String token,String stripe,String address)
     {
-    editor.putBoolean(IS_LOGIN,true);
-    editor.putString(KEY_id,id);
-    editor.putString(KEY_type,type);
-    editor.putString(KEY_email,email);
+        editor.putBoolean(IS_LOGIN,true);
+        editor.putString(KEY_id,id);
+        editor.putString(KEY_type,type);
+        editor.putString(KEY_email,email);
         editor.putString(KEY_name,name);
         editor.putString(KEY_lname,name1);
 
@@ -66,25 +68,27 @@ public class SessionManagement {
         editor.putString(KEY_zip,zip);
         editor.putString(KEY_org,orgname);
         editor.putString(KEY_token,token);
+        editor.putString(KEY_stripeid,stripe);
+        editor.putString(KEY_addrid,address);
 
 
         editor.commit();
 
-}
-
-
-public void checkLogin()
-{
-    if(this.isLoggedIn())
-    {
-        Intent intent=new Intent(_context,Logon.class);
-       // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        // Clear all activities
-     //   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        // Add new flag to start new activity
-
-        _context.startActivity(intent);
     }
+
+
+    public void checkLogin()
+    {
+        if(this.isLoggedIn())
+        {
+            Intent intent=new Intent(_context,Logon.class);
+            // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            // Clear all activities
+            //   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            // Add new flag to start new activity
+
+            _context.startActivity(intent);
+        }
     /*else
     {
         Intent intent=new Intent(_context,Logon.class);
@@ -98,12 +102,12 @@ public void checkLogin()
     }
     */
 
-}
+    }
 
-public boolean isLoggedIn()
-{
-    return pref.getBoolean(IS_LOGIN,false);
-}
+    public boolean isLoggedIn()
+    {
+        return pref.getBoolean(IS_LOGIN,false);
+    }
 
 
 // Get session data
@@ -128,6 +132,8 @@ public boolean isLoggedIn()
         user.put(KEY_country,pref.getString(KEY_country,null));
         user.put(KEY_zip,pref.getString(KEY_zip,null));
         user.put(KEY_org,pref.getString(KEY_org,null));
+        user.put(KEY_stripeid,pref.getString(KEY_stripeid,null));
+        user.put(KEY_addrid,pref.getString(KEY_addrid,null));
 
 
         user.put(KEY_token,pref.getString(KEY_token,null));
